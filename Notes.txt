@@ -1,0 +1,95 @@
+!!!	FIX THE BUG IN THE GENERAL FILE I/O WINDOW	!!!
++ In VirtualAllocOpsDlg create a function to read the LV selected item and use that function in Commit, Fill & Free
+Multiple selection Free/commit/Fill
+Another Fill Method for reading when there is no write access
+All projects with MT build
+OnCancel OnOK event handler should be taken care of so that not each diaolg closes when ESC is hit
+Replace all hard-coded strings with Resource Strings
++ Make two versions x64 and x86
++ Supply a way to test the 3GB switch
+NOTE : Just make sure you have two versions of x86. Tests for 3 GB allocation and 4 GB VM Size succeeds
+Work on processor affinity
+Change the application title so that it reflects the instance number
+variable name'leri doðru koy örneðin iXyz olan long ise lXyz yap
++ export the functions from the DLLs
+check every if and if necessary add a error/warning message box
+remove all hard-coded values
+
+
+
+IDD_DIALOG_VA_OPERATIONS
++List view column headers
+
+Hang
+	Critical Section Deadlock
+	Wait for a Resource
+
+CPU
+	High CPU Utilization
+
+Exceptions
+	AV & DivbyZero
+	Stack Overflow
+
+Errors
+	Access Denied
+	FileNotFound
+
+Memory Group
+	Memory Mapped File
+	Heap Management
+	Basic Memory Allocation
+	Memory Allocation Operations
+		Address / Size (MB) / Reserved (MB) / Committed (MB)
+
+		Context Menu
+		New...
+		Commit...
+		Free
+
+I/O Group
+	General File Operations
+		We can add encrypted folders
+		Folder creation
+		Large file read with or w/o cache
+	Socket Client/Server with DataRate
+
+Handles and Objects
+http://msdn.microsoft.com/en-us/library/windows/desktop/ms724457(v=vs.85).aspx
+
+About Pipes
+http://msdn.microsoft.com/en-us/library/windows/desktop/aa365137(v=vs.85).aspx
+
+Handle
+	Create Handles 
+		File
+		Thread
+		Registry
+		Mutex
+		Event
+		Directory
+
+Leaks
+	Memory Leak
+	Handle Leak
+
+Limits	
+	Max Handles (Thread, File, Mutex, etc)
+
+
+	PAGE_EXECUTE
+	PAGE_EXECUTE_READ
+	PAGE_EXECUTE_READWRITE
+	PAGE_NOACCESS
+	PAGE_READONLY
+	PAGE_READWRITE
+	
+
+	REFERENCES
+	http://support.microsoft.com/kb/250614/en-us
+	http://www.softwareandfinance.com/Visual_CPP/MFC_CListCtrl_InsertColumnItem.html
+	http://support.microsoft.com/kb/222905
+	http://support.microsoft.com/kb/139469
+	http://forums.codeguru.com/showthread.php?151810-CListCtrl-context-menu-how-do-you-do-it
+	http://msgroups.net/microsoft.public.vc.mfc/context-menu-over-listctrl-question/143575
+	http://social.msdn.microsoft.com/Forums/vstudio/en-US/92edb41b-3bf1-4327-93c6-c2c1400e921e/how-to-create-a-context-menu-using-resources?forum=vcgeneral
