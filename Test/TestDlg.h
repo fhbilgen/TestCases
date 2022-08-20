@@ -40,4 +40,6 @@ public:
 	afx_msg void OnMemoryHeapoperations();
 	afx_msg void OnMemoryVirtualmemincreaseovertime();
 	afx_msg void OnCpuHighutilizationhighfilei();
+	afx_msg void OnBasicsProcess();
+	afx_msg void OnBasicsThread();
 };

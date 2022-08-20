@@ -16,6 +16,8 @@
 #include "FGIOCreateAndWriteDlg.h"
 #include "HeapOperations.h"
 #include "VirtualAllocIncrease.h"
+#include "BscProcTest.h"
+#include "BscThreadTestDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -88,6 +90,8 @@ BEGIN_MESSAGE_MAP(CTestDlg, CDialogEx)
 	ON_COMMAND(ID_MEMORY_HEAPOPERATIONS, &CTestDlg::OnMemoryHeapoperations)
 	ON_COMMAND(ID_MEMORY_VIRTUALMEMINCREASEOVERTIME, &CTestDlg::OnMemoryVirtualmemincreaseovertime)
 	ON_COMMAND(ID_CPU_HIGHUTILIZATIONHIGHFILEI, &CTestDlg::OnCpuHighutilizationhighfilei)
+	ON_COMMAND(ID_BASICS_PROCESS, &CTestDlg::OnBasicsProcess)
+	ON_COMMAND(ID_BASICS_THREAD, &CTestDlg::OnBasicsThread)
 END_MESSAGE_MAP()
 
 
@@ -275,4 +279,18 @@ void CTestDlg::OnCpuHighutilizationhighfilei()
 {
 	HiCPUHiIODlg	hchio;
 	hchio.DoModal();
+}
+
+
+void CTestDlg::OnBasicsProcess()
+{
+	BscProcTest basicProcDlg;
+	basicProcDlg.DoModal();	
+}
+
+
+void CTestDlg::OnBasicsThread()
+{
+	BscThreadTestDlg basicThreadDialog;
+	basicThreadDialog.DoModal();
 }
