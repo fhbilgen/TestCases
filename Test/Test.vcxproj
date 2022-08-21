@@ -194,17 +194,19 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BscHandleTestDlg.h" />
     <ClInclude Include="BscProcTest.h" />
     <ClInclude Include="BscThreadTestDlg.h" />
     <ClInclude Include="CaseFunctions.h" />
     <ClInclude Include="CritSecDlg.h" />
     <ClInclude Include="ExpDlg.h" />
     <ClInclude Include="FGIOCreateAndWriteDlg.h" />
-    <ClInclude Include="HandleCreateDlg.h" />
+    <ClInclude Include="FileHandler.h" />
     <ClInclude Include="HeapOperations.h" />
     <ClInclude Include="HiCPUDlg.h" />
     <ClInclude Include="HiCPUHiIODlg.h" />
     <ClInclude Include="InterProcWaitDlg.h" />
+    <ClInclude Include="MutexHandler.h" />
     <ClInclude Include="ProcHandler.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -219,17 +221,19 @@
     <ClInclude Include="VirtualAllocOpsNew.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BscHandleTestDlg.cpp" />
     <ClCompile Include="BscProcTest.cpp" />
     <ClCompile Include="BscThreadTestDlg.cpp" />
     <ClCompile Include="CaseFunctions.cpp" />
     <ClCompile Include="CritSecDlg.cpp" />
     <ClCompile Include="ExpDlg.cpp" />
     <ClCompile Include="FGIOCreateAndWriteDlg.cpp" />
-    <ClCompile Include="HandleCreateDlg.cpp" />
+    <ClCompile Include="FileHandler.cpp" />
     <ClCompile Include="HeapOperations.cpp" />
     <ClCompile Include="HiCPUDlg.cpp" />
     <ClCompile Include="HiCPUHiIODlg.cpp" />
     <ClCompile Include="InterProcWaitDlg.cpp" />
+    <ClCompile Include="MutexHandler.cpp" />
     <ClCompile Include="ProcHandler.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

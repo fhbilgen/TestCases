@@ -42,4 +42,5 @@ public:
 	afx_msg void OnCpuHighutilizationhighfilei();
 	afx_msg void OnBasicsProcess();
 	afx_msg void OnBasicsThread();
+	afx_msg void OnBasicsHandle();
 };

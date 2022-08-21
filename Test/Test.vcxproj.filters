@@ -63,9 +63,6 @@
     <ClInclude Include="FGIOCreateAndWriteDlg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HandleCreateDlg.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HeapOperations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -85,6 +82,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BscThreadTestDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BscHandleTestDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MutexHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -128,9 +134,6 @@
     <ClCompile Include="FGIOCreateAndWriteDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HandleCreateDlg.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="HeapOperations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -150,6 +153,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BscThreadTestDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BscHandleTestDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FileHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MutexHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -18,6 +18,7 @@
 #include "VirtualAllocIncrease.h"
 #include "BscProcTest.h"
 #include "BscThreadTestDlg.h"
+#include "BscHandleTestDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -92,6 +93,7 @@ BEGIN_MESSAGE_MAP(CTestDlg, CDialogEx)
 	ON_COMMAND(ID_CPU_HIGHUTILIZATIONHIGHFILEI, &CTestDlg::OnCpuHighutilizationhighfilei)
 	ON_COMMAND(ID_BASICS_PROCESS, &CTestDlg::OnBasicsProcess)
 	ON_COMMAND(ID_BASICS_THREAD, &CTestDlg::OnBasicsThread)
+	ON_COMMAND(ID_BASICS_HANDLE, &CTestDlg::OnBasicsHandle)
 END_MESSAGE_MAP()
 
 
@@ -293,4 +295,11 @@ void CTestDlg::OnBasicsThread()
 {
 	BscThreadTestDlg basicThreadDialog;
 	basicThreadDialog.DoModal();
+}
+
+
+void CTestDlg::OnBasicsHandle()
+{
+	BscHandleTestDlg basicHandleDialog;
+	basicHandleDialog.DoModal();
 }
