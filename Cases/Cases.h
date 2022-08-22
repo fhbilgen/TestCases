@@ -29,6 +29,12 @@ NO_NAME_MANGLING CASES_API void AccessViolateAndHandle();
 NO_NAME_MANGLING CASES_API void DivisionByZero();
 NO_NAME_MANGLING CASES_API void StackOverflow(int iFact);
 
+// For LoadLibrary tests 
+NO_NAME_MANGLING CASES_API int Add(int a, int b);
+NO_NAME_MANGLING CASES_API int Subtract(int a, int b);
+NO_NAME_MANGLING CASES_API int Multiply(int a, int b);
+NO_NAME_MANGLING CASES_API int Divide(int a, int b);
+
 class CASES_API Sync
 {
 public:

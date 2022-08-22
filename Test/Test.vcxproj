@@ -195,6 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BscHandleTestDlg.h" />
+    <ClInclude Include="BscLibTestDlg.h" />
     <ClInclude Include="BscProcTest.h" />
     <ClInclude Include="BscThreadTestDlg.h" />
     <ClInclude Include="CaseFunctions.h" />
@@ -206,6 +207,7 @@
     <ClInclude Include="HiCPUDlg.h" />
     <ClInclude Include="HiCPUHiIODlg.h" />
     <ClInclude Include="InterProcWaitDlg.h" />
+    <ClInclude Include="LibHandler.h" />
     <ClInclude Include="MutexHandler.h" />
     <ClInclude Include="ProcHandler.h" />
     <ClInclude Include="Resource.h" />
@@ -222,6 +224,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BscHandleTestDlg.cpp" />
+    <ClCompile Include="BscLibTestDlg.cpp" />
     <ClCompile Include="BscProcTest.cpp" />
     <ClCompile Include="BscThreadTestDlg.cpp" />
     <ClCompile Include="CaseFunctions.cpp" />
@@ -233,6 +236,7 @@
     <ClCompile Include="HiCPUDlg.cpp" />
     <ClCompile Include="HiCPUHiIODlg.cpp" />
     <ClCompile Include="InterProcWaitDlg.cpp" />
+    <ClCompile Include="LibHandler.cpp" />
     <ClCompile Include="MutexHandler.cpp" />
     <ClCompile Include="ProcHandler.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -254,9 +258,6 @@
     <ResourceCompile Include="Test.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="ClassDiagram1.cd" />
-    <None Include="ClassDiagram2.cd" />
     <None Include="res\Test.rc2" />
   </ItemGroup>
   <ItemGroup>

@@ -19,6 +19,7 @@
 #include "BscProcTest.h"
 #include "BscThreadTestDlg.h"
 #include "BscHandleTestDlg.h"
+#include "BscLibTestDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -94,6 +95,7 @@ BEGIN_MESSAGE_MAP(CTestDlg, CDialogEx)
 	ON_COMMAND(ID_BASICS_PROCESS, &CTestDlg::OnBasicsProcess)
 	ON_COMMAND(ID_BASICS_THREAD, &CTestDlg::OnBasicsThread)
 	ON_COMMAND(ID_BASICS_HANDLE, &CTestDlg::OnBasicsHandle)
+	ON_COMMAND(ID_BASICS_DLL, &CTestDlg::OnBasicsDll)
 END_MESSAGE_MAP()
 
 
@@ -302,4 +304,11 @@ void CTestDlg::OnBasicsHandle()
 {
 	BscHandleTestDlg basicHandleDialog;
 	basicHandleDialog.DoModal();
+}
+
+
+void CTestDlg::OnBasicsDll()
+{
+	BscLibTestDlg basicLibDialog;
+	basicLibDialog.DoModal();
 }

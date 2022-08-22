@@ -147,6 +147,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArithmeticOperations.h" />
     <ClInclude Include="Cases.h" />
     <ClInclude Include="Crash.h" />
     <ClInclude Include="Hang.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ArithmeticOperations.cpp" />
     <ClCompile Include="Cases.cpp" />
     <ClCompile Include="Crash.cpp" />
     <ClCompile Include="dllmain.cpp">
