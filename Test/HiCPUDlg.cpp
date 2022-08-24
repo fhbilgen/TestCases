@@ -153,16 +153,16 @@ void HiCPUDlg::SetControls()
 {
 	int iCores = 0;
 	int iSuggestedNumOfThreads = 0;
-	wchar_t	wszNumOfCores[5];
-	wchar_t wszSuggestedNumOfThreads[5];
-	wchar_t wszCoreMessage[100];
+	_TCHAR	szNumOfCores[5];
+	_TCHAR szSuggestedNumOfThreads[5];
+	_TCHAR szCoreMessage[100];
 	
 	iCores = NumberOfCores();
 
-	_itow_s(iCores, wszNumOfCores, 5, 10);
+	_itot_s(iCores, szNumOfCores, 5, 10);
 	
-	_stprintf_s(wszCoreMessage, 100, _T("This computer has %s cores"), wszNumOfCores);
-	m_statCores.SetWindowTextW(wszCoreMessage);
+	_stprintf_s(szCoreMessage, 100, _T("This computer has %s cores"), szNumOfCores);
+	m_statCores.SetWindowTextW(szCoreMessage);
 
 	if ( iCores < 4 )
 		iSuggestedNumOfThreads = iCores;
@@ -172,8 +172,8 @@ void HiCPUDlg::SetControls()
 
 	m_iNumOfThreads = iSuggestedNumOfThreads;
 
-	_itow_s(iSuggestedNumOfThreads, wszSuggestedNumOfThreads, 5, 10);
-	m_edtNumOfThreads.SetWindowTextW(wszSuggestedNumOfThreads);
+	_itot_s(iSuggestedNumOfThreads, szSuggestedNumOfThreads, 5, 10);
+	m_edtNumOfThreads.SetWindowTextW(szSuggestedNumOfThreads);
 
 
 	m_btnStopThreads.EnableWindow(FALSE);

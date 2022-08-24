@@ -110,8 +110,8 @@ void VirtualAllocDlg::OnBnClickedButtonVaReserve()
 	_TCHAR	wszErrorMessage[100];
 	_TCHAR  wszDescription[100];
 
-	dwNumOfChars = (SIZE_T)(m_iSize)*(1024 * 1024) / sizeof(wchar_t);
-	m_wszMemoryBlock = (wchar_t*)VirtualAlloc(NULL, sizeof(wchar_t)* dwNumOfChars, MEM_RESERVE, PAGE_READWRITE);
+	dwNumOfChars = (SIZE_T)(m_iSize)*(1024 * 1024) / sizeof(_TCHAR);
+	m_wszMemoryBlock = (_TCHAR*)VirtualAlloc(NULL, sizeof(_TCHAR)* dwNumOfChars, MEM_RESERVE, PAGE_READWRITE);
 
 	if (m_wszMemoryBlock == NULL)
 	{
@@ -143,8 +143,8 @@ void VirtualAllocDlg::OnBnClickedButtonVaCommit()
 	_TCHAR  wszDescription[100];
 	int		iProgBarCommitPos = 0;
 		
-	dwNumOfChars = (SIZE_T)(m_iCommitSize)* (1024 * 1024) / sizeof(wchar_t);
-	m_wszMemoryBlock = (wchar_t*)VirtualAlloc(m_wszMemoryBlock, sizeof(wchar_t)* dwNumOfChars, MEM_COMMIT, PAGE_READWRITE);
+	dwNumOfChars = (SIZE_T)(m_iCommitSize)* (1024 * 1024) / sizeof(_TCHAR);
+	m_wszMemoryBlock = (_TCHAR*)VirtualAlloc(m_wszMemoryBlock, sizeof(_TCHAR)* dwNumOfChars, MEM_COMMIT, PAGE_READWRITE);
 
 	if (m_wszMemoryBlock == NULL)
 	{
@@ -175,7 +175,7 @@ void VirtualAllocDlg::OnBnClickedButtonVaFill()
 	int iProgBarCommitPos = 0;
 
 	BeginWaitCursor();
-	dwNumOfChars = (size_t)(m_iCommitSize) * (1024 * 1024) / sizeof(wchar_t);
+	dwNumOfChars = (size_t)(m_iCommitSize) * (1024 * 1024) / sizeof(_TCHAR);
 	
 	wmemset(m_wszMemoryBlock, 'A', dwNumOfChars);
 

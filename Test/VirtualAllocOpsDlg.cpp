@@ -102,7 +102,7 @@ void VirtualAllocOpsDlg::OnNMRClickListVaEntries(NMHDR *pNMHDR, LRESULT *pResult
 	*pResult = 0;
 }
 
-void VirtualAllocOpsDlg::LVAddData(CListCtrl &ctrl, int row, int col, const wchar_t *str)
+void VirtualAllocOpsDlg::LVAddData(CListCtrl &ctrl, int row, int col, const _TCHAR *str)
 {
 	LVITEM lv;
 
@@ -118,7 +118,7 @@ void VirtualAllocOpsDlg::LVAddData(CListCtrl &ctrl, int row, int col, const wcha
 
 }
 
-void VirtualAllocOpsDlg::LVUpdateData(CListCtrl &ctrl, int row, int col, const wchar_t *str)
+void VirtualAllocOpsDlg::LVUpdateData(CListCtrl &ctrl, int row, int col, const _TCHAR *str)
 {
 	LVITEM lv;
 

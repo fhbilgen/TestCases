@@ -21,8 +21,8 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	void SetControls();
-	void LVAddData(CListCtrl &ctrl, int row, int col, const wchar_t *str);
-	void LVUpdateData(CListCtrl &ctrl, int row, int col, const wchar_t *str);
+	void LVAddData(CListCtrl &ctrl, int row, int col, const _TCHAR *str);
+	void LVUpdateData(CListCtrl &ctrl, int row, int col, const _TCHAR*str);
 	void ResetVAEntry();
 	static int filterFunc(unsigned int code, struct _EXCEPTION_POINTERS *ep);
 	static void BlockFill(_TCHAR* pStartAddress,int iSize);

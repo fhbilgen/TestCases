@@ -2,7 +2,7 @@
 #include "ProcHandler.h"
 
 
-void ProcHandler::SetAppPath(wchar_t* wszappPath)
+void ProcHandler::SetAppPath(_TCHAR* wszappPath)
 {
 	if (m_wszAppPath != NULL)
 	{
@@ -10,11 +10,11 @@ void ProcHandler::SetAppPath(wchar_t* wszappPath)
 		m_wszAppPath = NULL;
 	}
 
-	int strlen = wcslen(wszappPath) + 1;
-	m_wszAppPath = (wchar_t*)malloc( size_t(strlen) * sizeof(wchar_t) );	
+	int strlen = _tcslen(wszappPath) + 1;
+	m_wszAppPath = (_TCHAR*)malloc( size_t(strlen) * sizeof(_TCHAR) );
 
 	if ( m_wszAppPath != NULL )
-		wcscpy(m_wszAppPath, wszappPath);
+		_tcscpy(m_wszAppPath, wszappPath);
 }
 
 void ProcHandler::SetProcID(DWORD dwprocId)
@@ -37,7 +37,7 @@ void ProcHandler::SetThreadHandle(HANDLE hthread)
 	m_hThread = hthread;
 }
 
-wchar_t* ProcHandler::GetAppPath()
+_TCHAR* ProcHandler::GetAppPath()
 {
 	return m_wszAppPath;
 }

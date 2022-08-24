@@ -45,13 +45,13 @@ END_MESSAGE_MAP()
 
 void BscProcTest::SetProcessInfo()
 {
-	wchar_t wszProcHandle[16];
-	wchar_t wszProcID[16];
-	wchar_t wszThreadHandle[16];
-	wchar_t wszThreadID[16];
+	_TCHAR wszProcHandle[16];
+	_TCHAR wszProcID[16];
+	_TCHAR wszThreadHandle[16];
+	_TCHAR wszThreadID[16];
 
-	_ultow_s(phCurrent.GetProcID(), wszProcID, 10);
-	_ultow_s(phCurrent.GetThreadID(), wszThreadID, 10);
+	_ultot_s(phCurrent.GetProcID(), wszProcID, 10);
+	_ultot_s(phCurrent.GetThreadID(), wszThreadID, 10);
 
 	_itow_s((int)(phCurrent.GetProcHandle()), wszProcHandle, 10);
 	_itow_s((int)(phCurrent.GetThreadHandle()), wszThreadHandle, 10);
@@ -76,7 +76,7 @@ void BscProcTest::ClearProcessInfo()
 void BscProcTest::OnBnClickedButtonProcAppname()
 {
 	CString pathName;
-	wchar_t* path = NULL;	
+	_TCHAR* path = NULL;
 	CFileDialog dlgFile(TRUE);
 	
 
@@ -84,9 +84,9 @@ void BscProcTest::OnBnClickedButtonProcAppname()
 	pathName = dlgFile.GetPathName();
 
 	
-	path = (wchar_t*)malloc(sizeof(wchar_t) * (pathName.GetLength() + 2));
+	path = (_TCHAR*)malloc(sizeof(_TCHAR) * (pathName.GetLength() + 2));
 	if ( path != NULL )
-		wcscpy(path,(const wchar_t*)pathName);
+		_tcscpy(path,(const _TCHAR*)pathName);
 
 
 	if (path != nullptr && *path != '\0')
@@ -115,8 +115,8 @@ BOOL BscProcTest::OnInitDialog()
 void BscProcTest::OnClickedButtonProccreate()
 {
 
-	wchar_t wszErrMsg[100] = _T("Process creation failed with error ");
-	wchar_t wszErrNo[16] = _T("");
+	_TCHAR szErrMsg[100] = _T("Process creation failed with error ");
+	_TCHAR szErrNo[16] = _T("");
 
 	if (!phCurrent.IsAppPathEmpty())
 	{
@@ -129,9 +129,9 @@ void BscProcTest::OnClickedButtonProccreate()
 		}
 		else
 		{
-			_ultow_s(phCurrent.GetError(), wszErrNo, 10);
-			wcscat_s(wszErrMsg, wszErrNo);
-			AfxMessageBox(wszErrMsg, MB_ICONERROR | MB_OK, 0);
+			_ultot_s(phCurrent.GetError(), szErrNo, 10);
+			_tcscat_s(szErrMsg, szErrNo);
+			AfxMessageBox(szErrMsg, MB_ICONERROR | MB_OK, 0);
 		}
 	}
 	else
@@ -143,14 +143,14 @@ void BscProcTest::OnClickedButtonProccreate()
 
 void BscProcTest::OnClickedButtonProckill()
 {
-	wchar_t wszErrMsg[100] = _T("Process termination failed with error ");
-	wchar_t wszErrNo[16] = _T("");
+	_TCHAR szErrMsg[100] = _T("Process termination failed with error ");
+	_TCHAR szErrNo[16] = _T("");
 
 	if (!phCurrent.KillCurrentProcess())
 	{
-		_ultow_s(phCurrent.GetError(), wszErrNo, 10);
-		wcscat_s(wszErrMsg, wszErrNo);
-		AfxMessageBox(wszErrMsg, MB_ICONERROR | MB_OK, 0);
+		_ultot_s(phCurrent.GetError(), szErrNo, 10);
+		_tcscat_s(szErrMsg, szErrNo);
+		AfxMessageBox(szErrMsg, MB_ICONERROR | MB_OK, 0);
 	}
 
 	ClearProcessInfo();

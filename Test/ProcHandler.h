@@ -6,7 +6,7 @@
 class ProcHandler
 {
 private:
-	wchar_t* m_wszAppPath = NULL;
+	_TCHAR* m_wszAppPath = NULL;
 	DWORD m_dwLastError = S_OK;
 	DWORD m_dwProcID = 0;
 	DWORD m_dwThreadID = 0;
@@ -14,7 +14,7 @@ private:
 	HANDLE m_hThread = NULL;
 
 public:	
-	void SetAppPath(wchar_t* wszappPath);
+	void SetAppPath(_TCHAR* wszappPath);
 	void SetProcID(DWORD dwprocId);
 	void SetThreadID(DWORD dwthreadID);
 	void SetProcHandle(HANDLE hproc);
@@ -23,7 +23,7 @@ public:
 	HANDLE GetProcHandle();
 	HANDLE GetThreadHandle();
 	DWORD GetThreadID();
-	wchar_t* ProcHandler::GetAppPath();
+	_TCHAR* ProcHandler::GetAppPath();
 
 	BOOL IsAppPathEmpty();
 	BOOL CreateNewProcess();

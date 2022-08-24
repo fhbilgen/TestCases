@@ -27,7 +27,7 @@ public:
 	CButton m_btnFree;
 	virtual BOOL OnInitDialog();
 	void SetControls();	
-	wchar_t*	m_wszMemoryBlock;	
+	_TCHAR*	m_wszMemoryBlock;
 	afx_msg void OnBnClickedButtonVaAllocate();
 	afx_msg void OnBnClickedButtonVaFree();
 	CButton m_btnReserve;
