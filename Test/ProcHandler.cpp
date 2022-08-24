@@ -4,67 +4,67 @@
 
 void ProcHandler::SetAppPath(wchar_t* wszappPath)
 {
-	if (wszAppPath != NULL)
+	if (m_wszAppPath != NULL)
 	{
-		free(wszAppPath);
-		wszAppPath = NULL;
+		free(m_wszAppPath);
+		m_wszAppPath = NULL;
 	}
 
 	int strlen = wcslen(wszappPath) + 1;
-	wszAppPath = (wchar_t*)malloc( size_t(strlen) * sizeof(wchar_t) );	
+	m_wszAppPath = (wchar_t*)malloc( size_t(strlen) * sizeof(wchar_t) );	
 
-	if ( wszAppPath != NULL )
-		wcscpy(wszAppPath, wszappPath);
+	if ( m_wszAppPath != NULL )
+		wcscpy(m_wszAppPath, wszappPath);
 }
 
 void ProcHandler::SetProcID(DWORD dwprocId)
 {
-	dwProcID = dwprocId;
+	m_dwProcID = dwprocId;
 }
 
 void ProcHandler::SetThreadID(DWORD dwthreadID)
 {
-	dwThreadID = dwthreadID;
+	m_dwThreadID = dwthreadID;
 }
 
 void ProcHandler::SetProcHandle(HANDLE hproc)
 {
-	hProc = hproc;
+	m_hProc = hproc;
 }
 
 void ProcHandler::SetThreadHandle(HANDLE hthread)
 {
-	hThread = hthread;
+	m_hThread = hthread;
 }
 
 wchar_t* ProcHandler::GetAppPath()
 {
-	return wszAppPath;
+	return m_wszAppPath;
 }
 
 DWORD ProcHandler::GetProcID()
 {
-	return dwProcID;
+	return m_dwProcID;
 }
 
 HANDLE ProcHandler::GetProcHandle()
 {
-	return hProc;
+	return m_hProc;
 }
 
 HANDLE ProcHandler::GetThreadHandle()
 {
-	return hThread;
+	return m_hThread;
 }
 
 DWORD ProcHandler::GetThreadID()
 {
-	return dwThreadID;
+	return m_dwThreadID;
 }
 
 BOOL ProcHandler::IsAppPathEmpty()
 {
-	if (wcsnlen_s(wszAppPath, MAX_PATH) == 0)
+	if (wcsnlen_s(m_wszAppPath, MAX_PATH) == 0)
 		return TRUE;
 	else
 		return FALSE;
@@ -81,8 +81,8 @@ void ProcHandler::ClearData()
 
 void ProcHandler::ClearProcessResidue()
 {
-	CloseHandle(hProc);
-	CloseHandle(hThread);
+	CloseHandle(m_hProc);
+	CloseHandle(m_hThread);
 }
 
 BOOL ProcHandler::CreateNewProcess()
@@ -94,9 +94,9 @@ BOOL ProcHandler::CreateNewProcess()
 	si.cb = sizeof(si);
 	ZeroMemory(&pi, sizeof(pi));
 
-	if (CreateProcess(NULL, wszAppPath, NULL, NULL, false, 0, NULL, NULL, &si, &pi))
+	if (CreateProcess(NULL, m_wszAppPath, NULL, NULL, false, 0, NULL, NULL, &si, &pi))
 	{
-		dwLastError = S_OK;
+		m_dwLastError = S_OK;
 		SetProcHandle(pi.hProcess);
 		SetProcID(pi.dwProcessId);
 		SetThreadHandle(pi.hThread);
@@ -105,14 +105,14 @@ BOOL ProcHandler::CreateNewProcess()
 	}
 	else
 	{
-		dwLastError = GetLastError();
+		m_dwLastError = GetLastError();
 		return FALSE;
 	}
 }
 
 BOOL ProcHandler::KillCurrentProcess()
 {
-	if (TerminateProcess(hProc, 0))
+	if (TerminateProcess(m_hProc, 0))
 	{
 		ClearProcessResidue();
 		ClearData();		
@@ -120,14 +120,19 @@ BOOL ProcHandler::KillCurrentProcess()
 	}
 	else
 	{
-		dwLastError = GetLastError();
+		m_dwLastError = GetLastError();
 		return FALSE;
 	}
 }
 
 void ProcHandler::WaitProcessExit()
 {
-	WaitForSingleObject(hProc, INFINITE);		
+	WaitForSingleObject(m_hProc, INFINITE);		
 	ClearProcessResidue();
 	ClearData();
+}
+
+DWORD ProcHandler::GetError()
+{
+	return m_dwLastError;
 }

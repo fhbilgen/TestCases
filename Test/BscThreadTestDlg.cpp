@@ -63,7 +63,7 @@ void BscThreadTestDlg::OnBnClickedButtonThreadCount()
 	else
 	{
 		EndWaitCursor();
-		_stprintf_s(wszMessage, 100, _T("Counting job failed with error %d"), thCurrent.dwLastError);
+		_stprintf_s(wszMessage, 100, _T("Counting job failed with error %d"), thCurrent.GetError());
 		AfxMessageBox(wszMessage, MB_ICONERROR | MB_OK, 0);
 	}	
 }

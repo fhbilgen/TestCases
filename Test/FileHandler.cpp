@@ -16,49 +16,49 @@ BOOL FileHandler::InitiateFile(BOOL fOverWrite)
 		dwCreationDisposition = OPEN_ALWAYS;
 
 	// Open the file
-	hFile = CreateFile(szFileName, dwDesiredAccess, dwShareMode, NULL, dwCreationDisposition, dwFlagsAndAttributes, NULL);
+	m_hFile = CreateFile(m_szFileName, dwDesiredAccess, dwShareMode, NULL, dwCreationDisposition, dwFlagsAndAttributes, NULL);
 
-	if (INVALID_HANDLE_VALUE == hFile)
+	if (INVALID_HANDLE_VALUE == m_hFile)
 	{
-		dwLastError = GetLastError();		
+		m_dwLastError = GetLastError();
 		return FALSE;
 	}
 
 	// Write a simple line into the file. If it fails then close the file handle
-	if (! WriteFile(hFile, (VOID*)szFirstLine, _tcslen(szFirstLine) + 1, &dwBytesOut, NULL))
+	if (! WriteFile(m_hFile, (VOID*)m_szFirstLine, _tcslen(m_szFirstLine) + 1, &dwBytesOut, NULL))
 	{
-		dwLastError = GetLastError();
-		CloseHandle(hFile);
+		m_dwLastError = GetLastError();
+		CloseHandle(m_hFile);
 		return FALSE;
 	}
 	
 	// Get the full path length
-	dwBytesOut = GetFullPathName(szFileName, 0, szPath, lppPart);
+	dwBytesOut = GetFullPathName(m_szFileName, 0, m_szPath, lppPart);
 
 	if (0 == dwBytesOut)
 	{
-		dwLastError = GetLastError();
-		CloseHandle(hFile);
+		m_dwLastError = GetLastError();
+		CloseHandle(m_hFile);
 		return FALSE;
 	}
 
 	// Allocate memory for the path
-	szPath = (_TCHAR*)malloc(sizeof(_TCHAR) * dwBytesOut);
-	if (szPath == NULL)
+	m_szPath = (_TCHAR*)malloc(sizeof(_TCHAR) * dwBytesOut);
+	if (m_szPath == NULL)
 	{
-		dwLastError = GetLastError();
-		CloseHandle(hFile);
+		m_dwLastError = GetLastError();
+		CloseHandle(m_hFile);
 		return FALSE;
 	}
 	
 	// Set the full path
-	dwBytesOut = GetFullPathName(szFileName, dwBytesOut, szPath, lppPart);
+	dwBytesOut = GetFullPathName(m_szFileName, dwBytesOut, m_szPath, lppPart);
 	if (0 == dwBytesOut)
 	{
-		dwLastError = GetLastError();
-		CloseHandle(hFile);
-		free(szPath);
-		szPath = NULL;
+		m_dwLastError = GetLastError();
+		CloseHandle(m_hFile);
+		free(m_szPath);
+		m_szPath = NULL;
 		return FALSE;
 	}
 
@@ -67,27 +67,26 @@ BOOL FileHandler::InitiateFile(BOOL fOverWrite)
 
 void FileHandler::CloseFile()
 {
-	if (INVALID_HANDLE_VALUE != hFile)
+	if (INVALID_HANDLE_VALUE != m_hFile)
 	{
-		CloseHandle(hFile);
-		hFile = NULL;
-		free(szPath);
-		szPath = NULL;
+		CloseHandle(m_hFile);
+		m_hFile = NULL;
+		free(m_szPath);
+		m_szPath = NULL;
 	}
 }
 
 HANDLE FileHandler::GetFileHandle()
 {
-
-	return hFile;
+	return m_hFile;
 }
 
 _TCHAR* FileHandler::GetFilePath()
 {
-	return szPath;
+	return m_szPath;
 }
 
 DWORD FileHandler::GetError()
 {
-	return dwLastError;
+	return m_dwLastError;
 }

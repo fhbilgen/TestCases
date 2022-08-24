@@ -2,9 +2,9 @@
 class MutexHandler
 {
 private:
-	DWORD dwLastError = S_OK;
-	HANDLE hMutex = NULL;
-	_TCHAR szMutexName[20] = _T("MUTEXTest");
+	DWORD m_dwLastError = S_OK;
+	HANDLE m_hMutex = NULL;
+	_TCHAR m_szMutexName[20] = _T("MUTEXTest");
 
 public:
 	BOOL InitiateMutex(BOOL fCreate);

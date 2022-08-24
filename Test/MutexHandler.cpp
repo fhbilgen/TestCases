@@ -5,16 +5,16 @@ BOOL MutexHandler::InitiateMutex(BOOL fCreate)
 {
     if (fCreate)
     {
-        hMutex = CreateMutex(NULL, TRUE, szMutexName);
+        m_hMutex = CreateMutex(NULL, TRUE, m_szMutexName);
     }
     else
     {
-        hMutex = OpenMutex(SYNCHRONIZE, FALSE, szMutexName);
+        m_hMutex = OpenMutex(SYNCHRONIZE, FALSE, m_szMutexName);
     }
 
-    if (NULL == hMutex)
+    if (NULL == m_hMutex)
     {
-        dwLastError = GetLastError();
+        m_dwLastError = GetLastError();
         return FALSE;
     }
 
@@ -23,20 +23,20 @@ BOOL MutexHandler::InitiateMutex(BOOL fCreate)
 
 void MutexHandler::CloseMutex()
 {
-    CloseHandle(hMutex);
+    CloseHandle(m_hMutex);
 }
 
 HANDLE MutexHandler::GetMutexHandle()
 {
-    return hMutex;
+    return m_hMutex;
 }
 
 DWORD MutexHandler::GetError()
 {
-    return dwLastError;
+    return m_dwLastError;
 }
 
 _TCHAR* MutexHandler::GetMutexName()
 {
-    return szMutexName;
+    return m_szMutexName;
 }

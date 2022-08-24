@@ -2,11 +2,11 @@
 class FileHandler
 {
 private:
-	DWORD dwLastError = S_OK;
-	HANDLE hFile = NULL;	
-	_TCHAR* szPath = NULL;
-	_TCHAR szFileName[20] = _T("FileHandleTest.txt");
-	_TCHAR szFirstLine[30] = _T("This is the first line.");
+	DWORD m_dwLastError = S_OK;
+	HANDLE m_hFile = NULL;	
+	_TCHAR* m_szPath = NULL;
+	_TCHAR m_szFileName[20] = _T("FileHandleTest.txt");
+	_TCHAR m_szFirstLine[30] = _T("This is the first line.");
 
 public:
 	BOOL InitiateFile(BOOL fOverWrite);

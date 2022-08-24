@@ -129,7 +129,7 @@ void BscProcTest::OnClickedButtonProccreate()
 		}
 		else
 		{
-			_ultow_s(phCurrent.dwLastError, wszErrNo, 10);
+			_ultow_s(phCurrent.GetError(), wszErrNo, 10);
 			wcscat_s(wszErrMsg, wszErrNo);
 			AfxMessageBox(wszErrMsg, MB_ICONERROR | MB_OK, 0);
 		}
@@ -146,20 +146,17 @@ void BscProcTest::OnClickedButtonProckill()
 	wchar_t wszErrMsg[100] = _T("Process termination failed with error ");
 	wchar_t wszErrNo[16] = _T("");
 
-	if (phCurrent.KillCurrentProcess())
+	if (!phCurrent.KillCurrentProcess())
 	{
-		ClearProcessInfo();
-		m_btnproc.EnableWindow(TRUE);
-		m_btnProcExit.EnableWindow(FALSE);
-		m_btnProcKill.EnableWindow(FALSE);
-	}
-	else
-	{
-		_ultow_s(phCurrent.dwLastError, wszErrNo, 10);
+		_ultow_s(phCurrent.GetError(), wszErrNo, 10);
 		wcscat_s(wszErrMsg, wszErrNo);
 		AfxMessageBox(wszErrMsg, MB_ICONERROR | MB_OK, 0);
 	}
 
+	ClearProcessInfo();
+	m_btnproc.EnableWindow(TRUE);
+	m_btnProcExit.EnableWindow(FALSE);
+	m_btnProcKill.EnableWindow(FALSE);
 }
 
 

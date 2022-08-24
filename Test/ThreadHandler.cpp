@@ -17,24 +17,24 @@ DWORD WINAPI CountingFunction(LPVOID lpParam)
 
 void ThreadHandler::SetThreadingInfo(int nThreads, ULONGLONG ullimit)
 {
-    iCounters = nThreads;
-    ullLimit = ullimit;
-    ullSlice = ullLimit / (ULONGLONG)nThreads;
+    m_iCounters = nThreads;
+    m_ullLimit = ullimit;
+    m_ullSlice = m_ullLimit / (ULONGLONG)nThreads;
 }
 
 ULONGLONG ThreadHandler::GetExecutionDuration()
 {
-    return ullDuration;
+    return m_ullDuration;
 }
 
 ULONGLONG ThreadHandler::GetLimit()
 {
-    return ullLimit;
+    return m_ullLimit;
 }
 
 int ThreadHandler::GetThreadCount()
 {
-    return iCounters;
+    return m_iCounters;
 }
 
 BOOL ThreadHandler::StartCounting()
@@ -42,49 +42,49 @@ BOOL ThreadHandler::StartCounting()
     HANDLE* handles = NULL;
     DWORD* threads = NULL;
 
-    PCountingBoundary boundaries = (PCountingBoundary)malloc(sizeof(CountingBoundary) * iCounters);
-    if (boundaries == NULL)
+    PCountingBoundary boundaries = (PCountingBoundary)malloc(sizeof(CountingBoundary) * m_iCounters);
+    if ( NULL == boundaries )
     {    
-        dwLastError = GetLastError();
+        m_dwLastError = GetLastError();
         return FALSE;
     }
 
-    handles = (HANDLE*)malloc(sizeof(HANDLE) * iCounters);
-    if (handles == NULL)
+    handles = (HANDLE*)malloc(sizeof(HANDLE) * m_iCounters);
+    if ( NULL == handles )
     {
-        dwLastError = GetLastError();
+        m_dwLastError = GetLastError();
         return FALSE;
     }
 
-    threads = (DWORD*)malloc(sizeof(DWORD) * iCounters);
-    if (threads == NULL)
+    threads = (DWORD*)malloc(sizeof(DWORD) * m_iCounters);
+    if ( NULL == threads )
     {
-        dwLastError = GetLastError();
+        m_dwLastError = GetLastError();
         return FALSE;
     }
 
     ULONGLONG start = GetTickCount64();
 
-    for (int i = 0; i != iCounters; i++)
+    for (UINT i = 0; i != m_iCounters; i++)
     {
-        boundaries[i].begin = ullSlice * (ULONGLONG)i;
-        boundaries[i].end = ullSlice * ULONGLONG(i + 1);
+        boundaries[i].begin = m_ullSlice * i;
+        boundaries[i].end = m_ullSlice * (i + 1);
        
-        handles[i] = CreateThread(NULL, 0, CountingFunction, (LPVOID)&boundaries[i], 0, &threads[i]);
+        handles[i] = CreateThread(NULL, 0, CountingFunction, (LPVOID)&(boundaries[i]), 0, &threads[i]);
 
         if (handles[i] == NULL)
         {
-            dwLastError = GetLastError();
+            m_dwLastError = GetLastError();
             return FALSE;
         }
     }
 
-    WaitForMultipleObjects(iCounters, handles, TRUE, INFINITE);
+    WaitForMultipleObjects(m_iCounters, handles, TRUE, INFINITE);
 
     ULONGLONG end = GetTickCount64();
-    ullDuration = end - start;
+    m_ullDuration = end - start;
 
-    for (int i = 0; i != iCounters; i++)
+    for (int i = 0; i != m_iCounters; i++)
         CloseHandle(handles[i]);
     
     free(handles);
@@ -92,4 +92,9 @@ BOOL ThreadHandler::StartCounting()
     free(boundaries);
 
     return TRUE;
+}
+
+DWORD ThreadHandler::GetError()
+{
+    return m_dwLastError;
 }
