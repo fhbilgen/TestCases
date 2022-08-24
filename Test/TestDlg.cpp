@@ -20,17 +20,17 @@
 #include "BscThreadTestDlg.h"
 #include "BscHandleTestDlg.h"
 #include "BscLibTestDlg.h"
+#include "Utilities.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
-/*
-1 32-bit
-2 32-bit LARGEADDRESSAWARE
-3 64-bit
-*/
-#define BITNESS 2
+int GetRunningInstanceCount()
+{
+
+	return 1;
+}
 
 // CAboutDlg dialog used for App About
 
@@ -111,7 +111,11 @@ BOOL CTestDlg::OnInitDialog()
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
 
+	_TCHAR szTitle[30] = _T("Test - ");;
+	_TCHAR* szSuffix = NULL;
+
 	CMenu* pSysMenu = GetSystemMenu(FALSE);
+	
 	if (pSysMenu != NULL)
 	{
 		BOOL bNameValid;
@@ -130,33 +134,27 @@ BOOL CTestDlg::OnInitDialog()
 	SetIcon(m_hIcon, TRUE);			// Set big icon
 	SetIcon(m_hIcon, FALSE);		// Set small icon
 
-
-	//if ( BITNESS == 1 )
-	//{
-	//	SetWindowText(_T("Test - 32 bit"));
-	//}
-	//else
-	//{
-	//	if ( BITNESS == 2 )
-	//	{
-	//		SetWindowText(_T("Test - 32 bit LARGEADDRESSAWARE"));
-	//	}
-	//	else
-	//	{
-	//		// BITNESS == 3
-	//		SetWindowText(_T("Test - 64 bit"));
-	//	}
-	//}
+	// Setting up the windows title
+	// It should reflect the platform and the instance count
 
 #if defined(_M_X64) || defined(__amd64__) || defined(_M_ARM64) || defined(_M_ARM64EC)
-// Building for 64bit target ARM, AMD or INTEL
-	SetWindowText(_T("Test - 64 bit"));
-#elif defined(_M_IX86)
-	SetWindowText(_T("Test - 32 bit"));
+// Building for 64bit target ARM, AMD or INTEL	
+	_tcscat(szTitle, _T("64 bit"));
+#elif defined(_M_IX86)	
+	_tcscat(szTitle, _T("32 bit"));
 #endif
 
+	szSuffix = GetInstanceCountText();
 
-	// TODO: Add extra initialization here
+	if (NULL != szSuffix)
+	{
+		_tcscat(szTitle, _T(" #"));
+		_tcscat(szTitle, szSuffix);
+		free(szSuffix);
+	}
+
+	SetWindowText(szTitle);
+	
 	if (!InitializeCaseFunctions())
 		AfxMessageBox(_T("Cases library is not loaded"), MB_OK, 0);
 
