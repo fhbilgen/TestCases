@@ -21,4 +21,5 @@ protected:
 public:
 	afx_msg void OnBnClickedButtonCsDeadlock();
 	afx_msg void OnBnClickedButtonCsOrphant();
+	virtual BOOL OnInitDialog();
 };

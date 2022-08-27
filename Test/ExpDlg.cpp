@@ -57,3 +57,14 @@ void ExpDlg::OnBnClickedButtonExpDivByZero()
 {
 	(g_fnDivisionByZero)();
 }
+
+
+BOOL ExpDlg::OnInitDialog()
+{
+	CDialogEx::OnInitDialog();
+
+	InitializeCaseFunctions();
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+	// EXCEPTION: OCX Property Pages should return FALSE
+}

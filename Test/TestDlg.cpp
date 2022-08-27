@@ -137,6 +137,8 @@ BOOL CTestDlg::OnInitDialog()
 	// Setting up the windows title
 	// It should reflect the platform and the instance count
 
+
+	// This part is doing the platform detection part
 #if defined(_M_X64) || defined(__amd64__) || defined(_M_ARM64) || defined(_M_ARM64EC)
 // Building for 64bit target ARM, AMD or INTEL	
 	_tcscat(szTitle, _T("64 bit"));
@@ -144,6 +146,8 @@ BOOL CTestDlg::OnInitDialog()
 	_tcscat(szTitle, _T("32 bit"));
 #endif
 
+
+	// This part is doing the instance count part
 	szSuffix = GetInstanceCountText();
 
 	if (NULL != szSuffix)
@@ -155,8 +159,9 @@ BOOL CTestDlg::OnInitDialog()
 
 	SetWindowText(szTitle);
 	
-	if (!InitializeCaseFunctions())
-		AfxMessageBox(_T("Cases library is not loaded"), MB_OK, 0);
+	// Moved the functionality into the Case Windows
+	/*if (!InitializeCaseFunctions())
+		AfxMessageBox(_T("Cases library is not loaded"), MB_OK, 0);*/
 
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }

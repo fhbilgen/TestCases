@@ -51,7 +51,7 @@ BOOL InterProcWaitDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
-	// TODO:  Add extra initialization here
+	InitializeCaseFunctions();
 	SetControls();
 
 	return TRUE;  // return TRUE unless you set the focus to a control

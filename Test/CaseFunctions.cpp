@@ -18,11 +18,18 @@ BOOL InitializeCaseFunctions()
 {
 	BOOL result = FALSE;
 	
-	g_hinstCases = LoadLibrary(_TEXT("Cases.dll"));
-
 	if (NULL == g_hinstCases)
-		return FALSE;
+	{
 
+		g_hinstCases = LoadLibrary(_TEXT("Cases.dll"));
+
+		if (NULL == g_hinstCases)
+		{
+			AfxMessageBox(_T("Cases.dll library is not loaded"), MB_OK, 0);
+			return FALSE;
+		}
+	}
+	
 	g_fnCreateDeadlock = (CreateDeadlockProc)GetProcAddress(g_hinstCases, "CreateDeadlock");
 	g_fnWaitOnOrphantCS = (WaitOnOrphantCSProc)GetProcAddress(g_hinstCases, "WaitOnOrphantCS");
 	g_fnHiCPUUtilization = (HiCPUUtilizationProc)GetProcAddress(g_hinstCases, "HiCPUUtilization");

@@ -22,4 +22,5 @@ public:
 	afx_msg void OnBnClickedButtonExpAv();
 	afx_msg void OnBnClickedButtonAvWithHandler();
 	afx_msg void OnBnClickedButtonExpDivByZero();
+	virtual BOOL OnInitDialog();
 };
