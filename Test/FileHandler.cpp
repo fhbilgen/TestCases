@@ -25,7 +25,7 @@ BOOL FileHandler::InitiateFile(BOOL fOverWrite)
 	}
 
 	// Write a simple line into the file. If it fails then close the file handle
-	if (! WriteFile(m_hFile, (VOID*)m_szFirstLine, _tcslen(m_szFirstLine) + 1, &dwBytesOut, NULL))
+	if (! WriteFile(m_hFile, (VOID*)m_szFirstLine, sizeof(_TCHAR)*(_tcslen(m_szFirstLine) + 1), &dwBytesOut, NULL))
 	{
 		m_dwLastError = GetLastError();
 		CloseHandle(m_hFile);
