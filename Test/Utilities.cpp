@@ -91,11 +91,12 @@ _TCHAR* GetInstanceCountText()
         if (GetInstanceCount(pdwProcList, iProcCount, &iInstanceCount))
             if (iInstanceCount > 0)
             {
-                _itot(iInstanceCount, szCount, 10);
+                _itot_s(iInstanceCount, szCount, _countof(szCount), 10);
 
-                szCnt = (_TCHAR*)malloc(sizeof(_TCHAR) * (_tcslen(szCount) + 1));
+                int ln = (int)_tcslen(szCount) + 1 ;
+                szCnt = (_TCHAR*)malloc(sizeof(_TCHAR) * ln );
                 if (NULL != szCnt)
-                    _tcscpy(szCnt, szCount);
+                    _tcscpy_s(szCnt, ln, szCount);
 
             }
         free(pdwProcList);

@@ -42,6 +42,9 @@ BOOL ThreadHandler::StartCounting()
     HANDLE* handles = NULL;
     DWORD* threads = NULL;
 
+	
+    size_t x = sizeof(CountingBoundary);
+	
     PCountingBoundary boundaries = (PCountingBoundary)malloc(sizeof(CountingBoundary) * m_iCounters);
     if ( NULL == boundaries )
     {    
@@ -70,7 +73,7 @@ BOOL ThreadHandler::StartCounting()
         boundaries[i].begin = m_ullSlice * i;
         boundaries[i].end = m_ullSlice * (i + 1);
        
-        handles[i] = CreateThread(NULL, 0, CountingFunction, (LPVOID)&(boundaries[i]), 0, &threads[i]);
+        handles[i] = CreateThread(NULL, 0, CountingFunction, (LPVOID)&(boundaries[i]), 0, &(threads[i]));
 
         if (handles[i] == NULL)
         {

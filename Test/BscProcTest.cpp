@@ -53,8 +53,9 @@ void BscProcTest::SetProcessInfo()
 	_ultot_s(phCurrent.GetProcID(), wszProcID, 10);
 	_ultot_s(phCurrent.GetThreadID(), wszThreadID, 10);
 
-	_itow_s((int)(phCurrent.GetProcHandle()), wszProcHandle, 10);
-	_itow_s((int)(phCurrent.GetThreadHandle()), wszThreadHandle, 10);
+	// in 64 bit this might create a problem therefore LONGLONG is good
+	_i64tot_s(  (LONGLONG)(phCurrent.GetProcHandle()), wszProcHandle, _countof(wszProcHandle), 10);
+	_i64tot_s(  (LONGLONG)(phCurrent.GetThreadHandle()), wszThreadHandle, _countof(wszThreadID), 10);
 
 	m_edtProcID.SetWindowTextW(wszProcID);
 	m_edtProcHandle.SetWindowTextW(wszProcHandle);
@@ -83,10 +84,11 @@ void BscProcTest::OnBnClickedButtonProcAppname()
 	dlgFile.DoModal();
 	pathName = dlgFile.GetPathName();
 
-	
-	path = (_TCHAR*)malloc(sizeof(_TCHAR) * (pathName.GetLength() + 2));
+	int ln = pathName.GetLength()+1;
+	path = (_TCHAR*)malloc(sizeof(_TCHAR) * ln );
+
 	if ( path != NULL )
-		_tcscpy(path,(const _TCHAR*)pathName);
+		_tcscpy_s(path, ln, (const _TCHAR*)pathName);
 
 
 	if (path != nullptr && *path != '\0')

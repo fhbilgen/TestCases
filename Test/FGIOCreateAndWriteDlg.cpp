@@ -217,7 +217,7 @@ void FGIOCreateAndWriteDlg::OnBnClickedButtonFgioStart()
 	IOOPENTRY		*pIOEntry = NULL;
 	FILEPROPS		*fp = NULL;
 	SYSTEMTIME		st, st2;
-	DWORD			tickStart = 0, tickEnd = 0;
+	ULONGLONG		tickStart = 0, tickEnd = 0;
 	_TCHAR			wszStartTime[100];
 	_TCHAR			wszCompleteTime[100];
 	_TCHAR			wszErrorMessage[100];
@@ -280,7 +280,7 @@ void FGIOCreateAndWriteDlg::OnBnClickedButtonFgioStart()
 	m_statThroughput.SetWindowTextW( _T(" bytes/sec") );
 
 	InitializeAndFillTheBuffer(pIOEntry->lBufferSize);
-	tickStart = GetTickCount();
+	tickStart = GetTickCount64();
 	for (int i = 0; i != pIOEntry->lNumOfFiles; i++)
 	{
 		_stprintf_s(fp->wszFileName, MAX_PATH, _T("%s\\Test_%d.txt"), pIOEntry->wszPath, i);
@@ -290,16 +290,17 @@ void FGIOCreateAndWriteDlg::OnBnClickedButtonFgioStart()
 		if (newPos > curPos)			
 			m_progFileNumber.SetPos(newPos);		
 	}
-	tickEnd = GetTickCount();
+	tickEnd = GetTickCount64();
 	GetLocalTime(&st2);
 	_stprintf_s(wszCompleteTime, 100, _T("Completed at %02d:%02d:%02d.%03d"), st2.wHour, st2.wMinute, st2.wSecond, st2.wMilliseconds);
 	m_statCompleteTime.SetWindowTextW(wszCompleteTime);
 
 	lThroughput = (long)(((double)pIOEntry->lNumOfFiles * (double)pIOEntry->lFileSize*1024.0) / double(tickEnd - tickStart) / 1000.0);
-	_stprintf_s(wszThroughPut, 100, _T("%d bytes/sec"), pIOEntry->wszPath, lThroughput);
+	//_stprintf_s(wszThroughPut, 100, _T("%d bytes/sec"), pIOEntry->wszPath, lThroughput);
+	_stprintf_s(wszThroughPut, 100, _T("%d bytes/sec"), lThroughput);
 	m_statThroughput.SetWindowTextW(wszThroughPut);
 	
-	_stprintf_s(wszThroughPut, 100, _T("%d"), tickEnd-tickStart);
+	_stprintf_s(wszThroughPut, 100, _T("%lld"), tickEnd-tickStart);
 	AfxMessageBox(wszThroughPut, MB_OK, 0);
 	free(fp);	
 	free(pIOEntry);

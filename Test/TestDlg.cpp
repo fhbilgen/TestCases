@@ -141,9 +141,9 @@ BOOL CTestDlg::OnInitDialog()
 	// This part is doing the platform detection part
 #if defined(_M_X64) || defined(__amd64__) || defined(_M_ARM64) || defined(_M_ARM64EC)
 // Building for 64bit target ARM, AMD or INTEL	
-	_tcscat(szTitle, _T("64 bit"));
+	_tcscat_s(szTitle, _T("64 bit"));
 #elif defined(_M_IX86)	
-	_tcscat(szTitle, _T("32 bit"));
+	_tcscat_s(szTitle, _T("32 bit"));
 #endif
 
 
@@ -152,8 +152,8 @@ BOOL CTestDlg::OnInitDialog()
 
 	if (NULL != szSuffix)
 	{
-		_tcscat(szTitle, _T(" #"));
-		_tcscat(szTitle, szSuffix);
+		_tcscat_s(szTitle, _T(" #"));
+		_tcscat_s(szTitle, szSuffix);
 		free(szSuffix);
 	}
 

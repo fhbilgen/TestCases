@@ -63,7 +63,7 @@ void HeapOperations::OnBnClickedButtonHeapOpsNewHeap()
 
 	if (NULL != m_hHeap)
 	{
-		_stprintf_s(wszDescription, 100, _T("A new heap with handle 0x%x is created"), m_hHeap);
+		_stprintf_s(wszDescription, 100, _T("A new heap with handle 0x%llX is created"), (LONGLONG)m_hHeap);
 		m_statNewHeap.SetWindowTextW(wszDescription);
 		m_btnNewHeap.EnableWindow(FALSE);
 	}
@@ -111,7 +111,7 @@ void HeapOperations::OnBnClickedButtonHeapOpsAlloc()
 			plv->iItem = m_lvHeapEntries.GetItemCount();
 			plv->iSubItem = 0;
 			wszAddress = (_TCHAR*)malloc(sizeof(_TCHAR) * 20);
-			_stprintf_s(wszAddress, 18, _T("0x%x"), cp);
+			_stprintf_s(wszAddress, 18, _T("%p"), cp);
 			plv->pszText = wszAddress;
 			plv->mask = LVIF_TEXT;						
 			m_lvHeapEntries.InsertItem(plv);

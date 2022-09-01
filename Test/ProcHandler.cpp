@@ -10,11 +10,11 @@ void ProcHandler::SetAppPath(_TCHAR* wszappPath)
 		m_wszAppPath = NULL;
 	}
 
-	int strlen = _tcslen(wszappPath) + 1;
-	m_wszAppPath = (_TCHAR*)malloc( size_t(strlen) * sizeof(_TCHAR) );
+	int strlen = (int)_tcslen(wszappPath) + 1;
+	m_wszAppPath = (_TCHAR*)malloc( strlen * sizeof(_TCHAR) );
 
 	if ( m_wszAppPath != NULL )
-		_tcscpy(m_wszAppPath, wszappPath);
+		_tcscpy_s(m_wszAppPath, strlen, wszappPath);
 }
 
 void ProcHandler::SetProcID(DWORD dwprocId)

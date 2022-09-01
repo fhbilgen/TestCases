@@ -89,7 +89,9 @@ void BscHandleTestDlg::OnBnClickedButtonBschndlFile()
 	}
 
 	m_edtFilePath.SetWindowTextW(m_fhCurrent.GetFilePath());
-	_itot((int)m_fhCurrent.GetFileHandle(), szHandle, 10);
+	
+	_i64tot_s((LONGLONG)m_fhCurrent.GetFileHandle(), szHandle, _countof(szHandle), 10);
+	
 	m_edtFileHandle.SetWindowTextW(szHandle);
 
 	m_btnCloseFile.EnableWindow(TRUE);
@@ -139,7 +141,7 @@ void BscHandleTestDlg::OnBnClickedButtonBschndlMutex()
 	}
 	
 	m_edtMutexName.SetWindowTextW(m_mhCurrent.GetMutexName());
-	_itot((int)m_mhCurrent.GetMutexHandle(), szHandle, 10);
+	_i64tot_s((LONGLONG)m_mhCurrent.GetMutexHandle(), szHandle, 10, 10);
 	m_edtMutexHandle.SetWindowTextW(szHandle);
 	
 
