@@ -56,107 +56,31 @@ END_MESSAGE_MAP()
 
 // FGIOCreateAndWriteDlg message handlers
 
-
-// http://social.msdn.microsoft.com/Forums/vstudio/en-US/cafc22f0-07d8-45f2-9ca6-c293c606dde6/how-to-call-cfiledialoggetifileopendialog?forum=vcgeneral
-// Getting a Folder's ID
 void FGIOCreateAndWriteDlg::OnBnClickedButtonFgioPath()
 {
+		
+	CString pathName;
+	_TCHAR* path = NULL;
+	CFileDialog dlgFile(TRUE, NULL, NULL, OFN_EXPLORER, NULL, NULL, 0, TRUE);
+	CFolderPickerDialog dlgFP(NULL, BIF_RETURNONLYFSDIRS | BIF_NEWDIALOGSTYLE, NULL, NULL);
 
-	HRESULT					hr;	
-	IFileDialog*			pfd = NULL;
-	IShellItem*				psiResult = NULL;
-	FILEOPENDIALOGOPTIONS	fodo;
-	_TCHAR					szMessage[100];
-	_TCHAR*					szPath = NULL;
+	dlgFP.DoModal();
+	pathName = dlgFP.GetPathName();
 
-	// No need to call CoInitialize as MFC should have called it already.
-	hr = CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&pfd));
-	if (FAILED(hr))
+	int ln = pathName.GetLength() + 1;
+	path = (_TCHAR*)malloc(sizeof(_TCHAR) * ln);
+
+	if (path != NULL)
+		_tcscpy_s(path, ln, (const _TCHAR*)pathName);
+
+
+	if (path != nullptr && *path != '\0')
 	{
-		_stprintf_s(szMessage, 100, _T("CCI for FileOpenDialog failed with 0x%x"), hr);
-		AfxMessageBox(szMessage, MB_OK | MB_ICONERROR, 0);
-		return;
+		
+		m_edtPath.SetWindowTextW(path);
+		free(path);
 	}
 		
-	hr = pfd->SetTitle(_T("Select a Folder"));
-	if (FAILED(hr))
-	{
-		_stprintf_s(szMessage, 100, _T("SetTitle in FileOpenDialog failed with 0x%x"), hr);
-		AfxMessageBox(szMessage, MB_OK | MB_ICONERROR, 0);
-		pfd->Release();
-		return;
-	}
-		
-	hr = pfd->GetOptions(&fodo);
-	if (FAILED(hr))
-	{
-		_stprintf_s(szMessage, 100, _T("GetOptions in FileOpenDialog failed with 0x%x"), hr);
-		AfxMessageBox(szMessage, MB_OK | MB_ICONERROR, 0);
-		pfd->Release();
-		return;
-	}
-
-	hr = pfd->SetOptions(fodo | FOS_PICKFOLDERS);
-	if (FAILED(hr))
-	{
-		_stprintf_s(szMessage, 100, _T("SetOptions in FileOpenDialog failed with 0x%x"), hr);
-		AfxMessageBox(szMessage, MB_OK | MB_ICONERROR, 0);
-		pfd->Release();
-		return;
-	}
-
-	hr = pfd->Show(this->m_hWnd);
-	if (FAILED(hr))
-	{
-		if (hr != HRESULT_FROM_WIN32(ERROR_CANCELLED))
-		{
-			_stprintf_s(szMessage, 100, _T("Show in FileOpenDialog failed with 0x%x"), hr);
-			AfxMessageBox(szMessage, MB_OK | MB_ICONERROR, 0);
-			pfd->Release();
-			return;
-		}
-		else
-		{
-			pfd->Release();
-			return;
-		}
-	}
-		
-	hr = pfd->GetResult(&psiResult);	
-	if (FAILED(hr))
-	{
-		_stprintf_s(szMessage, 100, _T("Show in FileOpenDialog failed with 0x%x"), hr);
-		AfxMessageBox(szMessage, MB_OK | MB_ICONERROR, 0);
-		pfd->Release();
-		return;
-	}
-	
-	if (NULL == psiResult)
-	{
-		_stprintf_s(szMessage, 100, _T("GetResult in FileOpenDialog returned nothing"));
-		AfxMessageBox(szMessage, MB_OK | MB_ICONERROR, 0);
-		pfd->Release();
-		return;
-	}
-			
-	hr = psiResult->GetDisplayName(SIGDN_FILESYSPATH, &szPath);
-	if (FAILED(hr))
-	{
-		_stprintf_s(szMessage, 100, _T("GetDisplayName in IShellItem failed with 0x%x"), hr);
-		AfxMessageBox(szMessage, MB_OK | MB_ICONERROR, 0);
-		pfd->Release();
-		psiResult->Release();
-		return;
-	}
-
-	
-	m_edtPath.SetWindowTextW(szPath);	
-	psiResult->Release();
-	pfd->Release();
-	CoTaskMemFree(szPath);
-	pfd = NULL;
-	psiResult = NULL;
-
 }
 
 

@@ -291,7 +291,7 @@ void CTestDlg::OnCpuHighutilizationhighfilei()
 
 void CTestDlg::OnBasicsProcess()
 {
-	BscProcTest basicProcDlg;
+	BscProcTestDlg basicProcDlg;
 	basicProcDlg.DoModal();	
 }
 

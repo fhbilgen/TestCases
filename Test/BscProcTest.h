@@ -4,13 +4,13 @@
 
 // BscProcTest dialog
 
-class BscProcTest : public CDialogEx
+class BscProcTestDlg : public CDialogEx
 {
-	DECLARE_DYNAMIC(BscProcTest)
+	DECLARE_DYNAMIC(BscProcTestDlg)
 
 public:
-	BscProcTest(CWnd* pParent = nullptr);   // standard constructor
-	virtual ~BscProcTest();
+	BscProcTestDlg(CWnd* pParent = nullptr);   // standard constructor
+	virtual ~BscProcTestDlg();
 
 	void ClearProcessInfo();
 	void SetProcessInfo();

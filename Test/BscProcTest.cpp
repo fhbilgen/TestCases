@@ -10,19 +10,19 @@
 
 // BscProcTest dialog
 
-IMPLEMENT_DYNAMIC(BscProcTest, CDialogEx)
+IMPLEMENT_DYNAMIC(BscProcTestDlg, CDialogEx)
 
-BscProcTest::BscProcTest(CWnd* pParent /*=nullptr*/)
+BscProcTestDlg::BscProcTestDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_DIALOG_BSC_PROC, pParent)
 {
 
 }
 
-BscProcTest::~BscProcTest()
+BscProcTestDlg::~BscProcTestDlg()
 {
 }
 
-void BscProcTest::DoDataExchange(CDataExchange* pDX)
+void BscProcTestDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Control(pDX, IDC_EDIT_PROC_APPNAME, m_edtAppPath);
@@ -36,14 +36,14 @@ void BscProcTest::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(BscProcTest, CDialogEx)
-	ON_BN_CLICKED(IDC_BUTTON_PROC_APPNAME, &BscProcTest::OnBnClickedButtonProcAppname)
-	ON_BN_CLICKED(IDC_BUTTON_PROCCREATE, &BscProcTest::OnClickedButtonProccreate)
-	ON_BN_CLICKED(IDC_BUTTON_PROCKILL, &BscProcTest::OnClickedButtonProckill)
-	ON_BN_CLICKED(IDC_BUTTON_PROCEXIT, &BscProcTest::OnClickedButtonProcexit)
+BEGIN_MESSAGE_MAP(BscProcTestDlg, CDialogEx)
+	ON_BN_CLICKED(IDC_BUTTON_PROC_APPNAME, &BscProcTestDlg::OnBnClickedButtonProcAppname)
+	ON_BN_CLICKED(IDC_BUTTON_PROCCREATE, &BscProcTestDlg::OnClickedButtonProccreate)
+	ON_BN_CLICKED(IDC_BUTTON_PROCKILL, &BscProcTestDlg::OnClickedButtonProckill)
+	ON_BN_CLICKED(IDC_BUTTON_PROCEXIT, &BscProcTestDlg::OnClickedButtonProcexit)
 END_MESSAGE_MAP()
 
-void BscProcTest::SetProcessInfo()
+void BscProcTestDlg::SetProcessInfo()
 {
 	_TCHAR szProcHandle[16];
 	_TCHAR szProcID[16];
@@ -63,7 +63,7 @@ void BscProcTest::SetProcessInfo()
 	m_edtThreadID.SetWindowTextW(szThreadID);
 }
 
-void BscProcTest::ClearProcessInfo()
+void BscProcTestDlg::ClearProcessInfo()
 {	
 	m_edtProcID.SetWindowTextW(_T(""));
 	m_edtProcHandle.SetWindowTextW(_T(""));
@@ -74,7 +74,7 @@ void BscProcTest::ClearProcessInfo()
 
 // BscProcTest message handlers
 
-void BscProcTest::OnBnClickedButtonProcAppname()
+void BscProcTestDlg::OnBnClickedButtonProcAppname()
 {
 	CString pathName;
 	_TCHAR* path = NULL;
@@ -102,7 +102,7 @@ void BscProcTest::OnBnClickedButtonProcAppname()
 }
 
 
-BOOL BscProcTest::OnInitDialog()
+BOOL BscProcTestDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 		
@@ -114,7 +114,7 @@ BOOL BscProcTest::OnInitDialog()
 	
 }
 
-void BscProcTest::OnClickedButtonProccreate()
+void BscProcTestDlg::OnClickedButtonProccreate()
 {
 
 	_TCHAR szErrMsg[100] = _T("Process creation failed with error ");
@@ -143,7 +143,7 @@ void BscProcTest::OnClickedButtonProccreate()
 }
 
 
-void BscProcTest::OnClickedButtonProckill()
+void BscProcTestDlg::OnClickedButtonProckill()
 {
 	_TCHAR szErrMsg[100] = _T("Process termination failed with error ");
 	_TCHAR szErrNo[16] = _T("");
@@ -162,7 +162,7 @@ void BscProcTest::OnClickedButtonProckill()
 }
 
 
-void BscProcTest::OnClickedButtonProcexit()
+void BscProcTestDlg::OnClickedButtonProcexit()
 {
 	phCurrent.WaitProcessExit();
 	ClearProcessInfo();
