@@ -45,22 +45,22 @@ END_MESSAGE_MAP()
 
 void BscProcTest::SetProcessInfo()
 {
-	_TCHAR wszProcHandle[16];
-	_TCHAR wszProcID[16];
-	_TCHAR wszThreadHandle[16];
-	_TCHAR wszThreadID[16];
+	_TCHAR szProcHandle[16];
+	_TCHAR szProcID[16];
+	_TCHAR szThreadHandle[16];
+	_TCHAR szThreadID[16];
 
-	_ultot_s(phCurrent.GetProcID(), wszProcID, 10);
-	_ultot_s(phCurrent.GetThreadID(), wszThreadID, 10);
+	_ultot_s(phCurrent.GetProcID(), szProcID, 10);
+	_ultot_s(phCurrent.GetThreadID(), szThreadID, 10);
 
 	// in 64 bit this might create a problem therefore LONGLONG is good
-	_i64tot_s(  (LONGLONG)(phCurrent.GetProcHandle()), wszProcHandle, _countof(wszProcHandle), 10);
-	_i64tot_s(  (LONGLONG)(phCurrent.GetThreadHandle()), wszThreadHandle, _countof(wszThreadID), 10);
+	_i64tot_s(  (LONGLONG)(phCurrent.GetProcHandle()), szProcHandle, _countof(szProcHandle), 10);
+	_i64tot_s(  (LONGLONG)(phCurrent.GetThreadHandle()), szThreadHandle, _countof(szThreadID), 10);
 
-	m_edtProcID.SetWindowTextW(wszProcID);
-	m_edtProcHandle.SetWindowTextW(wszProcHandle);
-	m_edtThreadHandle.SetWindowTextW(wszThreadHandle);
-	m_edtThreadID.SetWindowTextW(wszThreadID);
+	m_edtProcID.SetWindowTextW(szProcID);
+	m_edtProcHandle.SetWindowTextW(szProcHandle);
+	m_edtThreadHandle.SetWindowTextW(szThreadHandle);
+	m_edtThreadID.SetWindowTextW(szThreadID);
 }
 
 void BscProcTest::ClearProcessInfo()

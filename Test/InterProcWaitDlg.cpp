@@ -61,15 +61,15 @@ BOOL InterProcWaitDlg::OnInitDialog()
 
 void InterProcWaitDlg::OnBnClickedButtonIpGetResource()
 {
-	_TCHAR	wszErrorMessage[100];
+	_TCHAR	szErrorMessage[100];
 
 	m_picTrafficLight.SetBitmap(HBITMAP(imgRedLight));	
 	m_statStatus.SetWindowTextW( m_strResourceWait );
 	BeginWaitCursor();
 	if (!(g_fnGetResource)())
 	{
-		_stprintf_s(wszErrorMessage, 100, _T("Getting the resource failed. Error = 0x%x"), GetLastError());
-		AfxMessageBox(wszErrorMessage, MB_ICONERROR | MB_OK, 0);
+		_stprintf_s(szErrorMessage, 100, _T("Getting the resource failed. Error = 0x%x"), GetLastError());
+		AfxMessageBox(szErrorMessage, MB_ICONERROR | MB_OK, 0);
 		return;
 	}
 	
@@ -84,12 +84,12 @@ void InterProcWaitDlg::OnBnClickedButtonIpGetResource()
 
 void InterProcWaitDlg::OnBnClickedButtonIpReleaseResource()
 {
-	_TCHAR	wszErrorMessage[100];
+	_TCHAR	szErrorMessage[100];
 
 	if (!(g_fnReleaseResource)())
 	{
-		_stprintf_s(wszErrorMessage, 100, _T("releasing the resource failed. Error = 0x%x"), GetLastError());
-		AfxMessageBox(wszErrorMessage, MB_ICONERROR | MB_OK, 0);
+		_stprintf_s(szErrorMessage, 100, _T("releasing the resource failed. Error = 0x%x"), GetLastError());
+		AfxMessageBox(szErrorMessage, MB_ICONERROR | MB_OK, 0);
 		return;
 	}
 

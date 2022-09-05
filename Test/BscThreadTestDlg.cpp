@@ -37,19 +37,19 @@ END_MESSAGE_MAP()
 void BscThreadTestDlg::OnBnClickedButtonThreadCount()
 {
 	size_t strlen = 0;
-	CString wszThreadCount = NULL;
-	CString wszCountLimit = NULL;
+	CString szThreadCount = NULL;
+	CString szCountLimit = NULL;
 	int iThreadCount = 0;
 	ULONGLONG ullCountLimit = 0;
-	_TCHAR	wszMessage[100];
+	_TCHAR	szMessage[100];
 	
 	UpdateData(TRUE);
 
-	m_edtThreadCount.GetWindowTextW(wszThreadCount);
-	iThreadCount = _wtoi(wszThreadCount);
+	m_edtThreadCount.GetWindowTextW(szThreadCount);
+	iThreadCount = _wtoi(szThreadCount);
 	
-	m_edtThreadCountLimit.GetWindowTextW(wszCountLimit);
-	ullCountLimit = _wtoll(wszCountLimit);
+	m_edtThreadCountLimit.GetWindowTextW(szCountLimit);
+	ullCountLimit = _wtoll(szCountLimit);
 
 	thCurrent.SetThreadingInfo(iThreadCount, ullCountLimit);
 
@@ -57,13 +57,13 @@ void BscThreadTestDlg::OnBnClickedButtonThreadCount()
 	if (thCurrent.StartCounting())
 	{	
 		EndWaitCursor();
-		_stprintf_s(wszMessage, 100, _T("Counting until %lld is completed in %lld msec with with %d threads"), thCurrent.GetLimit(), thCurrent.GetExecutionDuration(), thCurrent.GetThreadCount());
-		AfxMessageBox(wszMessage, MB_ICONINFORMATION | MB_OK, 0);		
+		_stprintf_s(szMessage, 100, _T("Counting until %lld is completed in %lld msec with with %d threads"), thCurrent.GetLimit(), thCurrent.GetExecutionDuration(), thCurrent.GetThreadCount());
+		AfxMessageBox(szMessage, MB_ICONINFORMATION | MB_OK, 0);		
 	}
 	else
 	{
 		EndWaitCursor();
-		_stprintf_s(wszMessage, 100, _T("Counting job failed with error %d"), thCurrent.GetError());
-		AfxMessageBox(wszMessage, MB_ICONERROR | MB_OK, 0);
+		_stprintf_s(szMessage, 100, _T("Counting job failed with error %d"), thCurrent.GetError());
+		AfxMessageBox(szMessage, MB_ICONERROR | MB_OK, 0);
 	}	
 }

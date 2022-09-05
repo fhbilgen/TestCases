@@ -14,7 +14,7 @@ IMPLEMENT_DYNAMIC(VirtualAllocDlg, CDialogEx)
 VirtualAllocDlg::VirtualAllocDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(VirtualAllocDlg::IDD, pParent)
 	, m_iSize(0)
-	, m_wszMemoryBlock(NULL)
+	, m_szMemoryBlock(NULL)
 	, m_iCommitSize(0)
 {
 
@@ -107,21 +107,21 @@ void VirtualAllocDlg::OnEnChangeEditVaSize()
 void VirtualAllocDlg::OnBnClickedButtonVaReserve()
 {
 	SIZE_T	dwNumOfChars = 0;
-	_TCHAR	wszErrorMessage[100];
-	_TCHAR  wszDescription[100];
+	_TCHAR	szErrorMessage[100];
+	_TCHAR  szDescription[100];
 
 	dwNumOfChars = (SIZE_T)(m_iSize)*(1024 * 1024) / sizeof(_TCHAR);
-	m_wszMemoryBlock = (_TCHAR*)VirtualAlloc(NULL, sizeof(_TCHAR)* dwNumOfChars, MEM_RESERVE, PAGE_READWRITE);
+	m_szMemoryBlock = (_TCHAR*)VirtualAlloc(NULL, sizeof(_TCHAR)* dwNumOfChars, MEM_RESERVE, PAGE_READWRITE);
 
-	if (m_wszMemoryBlock == NULL)
+	if (m_szMemoryBlock == NULL)
 	{
-		_stprintf_s(wszErrorMessage, 100, _T("The memory block is not reserved. Error = 0x%X"), GetLastError());
-		AfxMessageBox(wszErrorMessage, MB_ICONERROR | MB_OK, 0);
+		_stprintf_s(szErrorMessage, 100, _T("The memory block is not reserved. Error = 0x%X"), GetLastError());
+		AfxMessageBox(szErrorMessage, MB_ICONERROR | MB_OK, 0);
 		return;
 	}
 
-	_stprintf_s(wszDescription, 100,  _T("A memory block is reserved starting from address 0x%p"), m_wszMemoryBlock);
-	m_statReserve.SetWindowTextW(wszDescription);
+	_stprintf_s(szDescription, 100,  _T("A memory block is reserved starting from address 0x%p"), m_szMemoryBlock);
+	m_statReserve.SetWindowTextW(szDescription);
 	m_statFree.SetWindowTextW(_T(""));
 
 	m_edtSize.EnableWindow(FALSE);
@@ -139,22 +139,22 @@ void VirtualAllocDlg::OnBnClickedButtonVaReserve()
 void VirtualAllocDlg::OnBnClickedButtonVaCommit()
 {
 	SIZE_T	dwNumOfChars = 0;
-	_TCHAR	wszErrorMessage[100];
-	_TCHAR  wszDescription[100];
+	_TCHAR	szErrorMessage[100];
+	_TCHAR  szDescription[100];
 	int		iProgBarCommitPos = 0;
 		
 	dwNumOfChars = (SIZE_T)(m_iCommitSize)* (1024 * 1024) / sizeof(_TCHAR);
-	m_wszMemoryBlock = (_TCHAR*)VirtualAlloc(m_wszMemoryBlock, sizeof(_TCHAR)* dwNumOfChars, MEM_COMMIT, PAGE_READWRITE);
+	m_szMemoryBlock = (_TCHAR*)VirtualAlloc(m_szMemoryBlock, sizeof(_TCHAR)* dwNumOfChars, MEM_COMMIT, PAGE_READWRITE);
 
-	if (m_wszMemoryBlock == NULL)
+	if (m_szMemoryBlock == NULL)
 	{
-		_stprintf_s(wszErrorMessage, 100, _T("The memory block is not committed. Error = 0x%X"), GetLastError());
-		AfxMessageBox(wszErrorMessage, MB_ICONERROR | MB_OK, 0);
+		_stprintf_s(szErrorMessage, 100, _T("The memory block is not committed. Error = 0x%X"), GetLastError());
+		AfxMessageBox(szErrorMessage, MB_ICONERROR | MB_OK, 0);
 		return;
 	}
 
-	_stprintf_s(wszDescription, 100, _T("%d MB of space is committed starting from address 0x%p"), m_iCommitSize, m_wszMemoryBlock);
-	m_statCommit.SetWindowTextW(wszDescription);
+	_stprintf_s(szDescription, 100, _T("%d MB of space is committed starting from address 0x%p"), m_iCommitSize, m_szMemoryBlock);
+	m_statCommit.SetWindowTextW(szDescription);
 
 	m_edtCommitSize.EnableWindow(FALSE);
 	m_btnReserve.EnableWindow(FALSE);
@@ -171,16 +171,16 @@ void VirtualAllocDlg::OnBnClickedButtonVaCommit()
 void VirtualAllocDlg::OnBnClickedButtonVaFill()
 {
 	size_t	dwNumOfChars = 0;	
-	_TCHAR  wszDescription[100];
+	_TCHAR  szDescription[100];
 	int iProgBarCommitPos = 0;
 
 	BeginWaitCursor();
 	dwNumOfChars = (size_t)(m_iCommitSize) * (1024 * 1024) / sizeof(_TCHAR);
 	
-	wmemset(m_wszMemoryBlock, 'A', dwNumOfChars);
+	wmemset(m_szMemoryBlock, 'A', dwNumOfChars);
 
-	_stprintf_s(wszDescription, 100, _T("The memory block is filled with A's"));
-	m_statFill.SetWindowTextW(wszDescription);
+	_stprintf_s(szDescription, 100, _T("The memory block is filled with A's"));
+	m_statFill.SetWindowTextW(szDescription);
 	
 	m_btnReserve.EnableWindow(FALSE);
 	m_btnCommit.EnableWindow(FALSE);
@@ -195,18 +195,18 @@ void VirtualAllocDlg::OnBnClickedButtonVaFill()
 
 void VirtualAllocDlg::OnBnClickedButtonVaFree()
 {
-	_TCHAR	wszErrorMessage[100];
-	_TCHAR  wszDescription[100];
+	_TCHAR	szErrorMessage[100];
+	_TCHAR  szDescription[100];
 
-	if (!VirtualFree((void*)m_wszMemoryBlock, 0, MEM_RELEASE))
+	if (!VirtualFree((void*)m_szMemoryBlock, 0, MEM_RELEASE))
 	{
-		_stprintf_s(wszErrorMessage, 100, _T("The memory block is not freed. Error = 0x%X"), GetLastError());
-		AfxMessageBox(wszErrorMessage, MB_ICONERROR | MB_OK, 0);
+		_stprintf_s(szErrorMessage, 100, _T("The memory block is not freed. Error = 0x%X"), GetLastError());
+		AfxMessageBox(szErrorMessage, MB_ICONERROR | MB_OK, 0);
 		return;
 	}
 
-	_stprintf_s(wszDescription, 100, _T("The memory block is released"));
-	m_statFree.SetWindowTextW(wszDescription);
+	_stprintf_s(szDescription, 100, _T("The memory block is released"));
+	m_statFree.SetWindowTextW(szDescription);
 
 	m_edtSize.SetWindowTextW(_T("0"));
 	m_edtSize.EnableWindow(TRUE);

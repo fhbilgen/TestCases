@@ -57,14 +57,14 @@ END_MESSAGE_MAP()
 void HeapOperations::OnBnClickedButtonHeapOpsNewHeap()
 {
 	//HANDLE hNewHeap = NULL;
-	_TCHAR  wszDescription[100];
+	_TCHAR  szDescription[100];
 
 	m_hHeap = HeapCreate(HEAP_GENERATE_EXCEPTIONS, m_InitHeapSize * 1024 * 1024, 0);
 
 	if (NULL != m_hHeap)
 	{
-		_stprintf_s(wszDescription, 100, _T("A new heap with handle 0x%llX is created"), (LONGLONG)m_hHeap);
-		m_statNewHeap.SetWindowTextW(wszDescription);
+		_stprintf_s(szDescription, 100, _T("A new heap with handle 0x%llX is created"), (LONGLONG)m_hHeap);
+		m_statNewHeap.SetWindowTextW(szDescription);
 		m_btnNewHeap.EnableWindow(FALSE);
 	}
 	else
@@ -87,8 +87,8 @@ void HeapOperations::OnBnClickedButtonHeapOpsAlloc()
 {
 	char *cp = NULL;
 	LVITEM *plv = NULL;
-	_TCHAR	*wszAddress = NULL;
-	_TCHAR	*wszSize = NULL;
+	_TCHAR	*szAddress = NULL;
+	_TCHAR	*szSize = NULL;
 
 	UpdateData(FALSE);
 
@@ -110,23 +110,23 @@ void HeapOperations::OnBnClickedButtonHeapOpsAlloc()
 			plv = (LVITEM*)malloc(sizeof(LVITEM));
 			plv->iItem = m_lvHeapEntries.GetItemCount();
 			plv->iSubItem = 0;
-			wszAddress = (_TCHAR*)malloc(sizeof(_TCHAR) * 20);
-			_stprintf_s(wszAddress, 18, _T("%p"), cp);
-			plv->pszText = wszAddress;
+			szAddress = (_TCHAR*)malloc(sizeof(_TCHAR) * 20);
+			_stprintf_s(szAddress, 18, _T("%p"), cp);
+			plv->pszText = szAddress;
 			plv->mask = LVIF_TEXT;						
 			m_lvHeapEntries.InsertItem(plv);
 
 			// col 1
 			plv->iSubItem = 1;
-			wszSize = (TCHAR*)malloc(sizeof(_TCHAR) * 20);
-			_stprintf_s(wszSize, 18, _T("%d"), m_iSize);
-			plv->pszText = wszSize;
+			szSize = (TCHAR*)malloc(sizeof(_TCHAR) * 20);
+			_stprintf_s(szSize, 18, _T("%d"), m_iSize);
+			plv->pszText = szSize;
 			plv->mask = LVIF_TEXT;
 			m_lvHeapEntries.SetItem(plv);
 
 			free(plv);
-			free(wszAddress);
-			free(wszSize);
+			free(szAddress);
+			free(szSize);
 			cp = NULL;
 		}
 	}
@@ -193,7 +193,7 @@ void HeapOperations::OnBnClickedButtonHeapOpsFree()
 	__int64		charAddress = 0;
 	char*		pch = NULL;
 	POSITION	pos;
-	_TCHAR		wszMessage[100];
+	_TCHAR		szMessage[100];
 
 	iRow = m_lvHeapEntries.GetSelectionMark();
 
@@ -212,8 +212,8 @@ void HeapOperations::OnBnClickedButtonHeapOpsFree()
 			pch = (char*)charAddress;
 			if ( !HeapFree(m_hHeap, HEAP_ZERO_MEMORY, pch ) )
 			{
-				_stprintf_s(wszMessage, 100, _T("Memory could not be freed. Error : 0x%x "), GetLastError());
-				AfxMessageBox(wszMessage, MB_ICONERROR, 0);				
+				_stprintf_s(szMessage, 100, _T("Memory could not be freed. Error : 0x%x "), GetLastError());
+				AfxMessageBox(szMessage, MB_ICONERROR, 0);				
 				return;
 			}
 			

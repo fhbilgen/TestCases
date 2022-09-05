@@ -66,23 +66,23 @@ void FGIOCreateAndWriteDlg::OnBnClickedButtonFgioPath()
 	IFileDialog*			pfd = NULL;
 	IShellItem*				psiResult = NULL;
 	FILEOPENDIALOGOPTIONS	fodo;
-	_TCHAR					wszMessage[100];
-	_TCHAR*					wszPath = NULL;
+	_TCHAR					szMessage[100];
+	_TCHAR*					szPath = NULL;
 
 	// No need to call CoInitialize as MFC should have called it already.
 	hr = CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_INPROC_SERVER, IID_PPV_ARGS(&pfd));
 	if (FAILED(hr))
 	{
-		_stprintf_s(wszMessage, 100, _T("CCI for FileOpenDialog failed with 0x%x"), hr);
-		AfxMessageBox(wszMessage, MB_OK | MB_ICONERROR, 0);
+		_stprintf_s(szMessage, 100, _T("CCI for FileOpenDialog failed with 0x%x"), hr);
+		AfxMessageBox(szMessage, MB_OK | MB_ICONERROR, 0);
 		return;
 	}
 		
 	hr = pfd->SetTitle(_T("Select a Folder"));
 	if (FAILED(hr))
 	{
-		_stprintf_s(wszMessage, 100, _T("SetTitle in FileOpenDialog failed with 0x%x"), hr);
-		AfxMessageBox(wszMessage, MB_OK | MB_ICONERROR, 0);
+		_stprintf_s(szMessage, 100, _T("SetTitle in FileOpenDialog failed with 0x%x"), hr);
+		AfxMessageBox(szMessage, MB_OK | MB_ICONERROR, 0);
 		pfd->Release();
 		return;
 	}
@@ -90,8 +90,8 @@ void FGIOCreateAndWriteDlg::OnBnClickedButtonFgioPath()
 	hr = pfd->GetOptions(&fodo);
 	if (FAILED(hr))
 	{
-		_stprintf_s(wszMessage, 100, _T("GetOptions in FileOpenDialog failed with 0x%x"), hr);
-		AfxMessageBox(wszMessage, MB_OK | MB_ICONERROR, 0);
+		_stprintf_s(szMessage, 100, _T("GetOptions in FileOpenDialog failed with 0x%x"), hr);
+		AfxMessageBox(szMessage, MB_OK | MB_ICONERROR, 0);
 		pfd->Release();
 		return;
 	}
@@ -99,8 +99,8 @@ void FGIOCreateAndWriteDlg::OnBnClickedButtonFgioPath()
 	hr = pfd->SetOptions(fodo | FOS_PICKFOLDERS);
 	if (FAILED(hr))
 	{
-		_stprintf_s(wszMessage, 100, _T("SetOptions in FileOpenDialog failed with 0x%x"), hr);
-		AfxMessageBox(wszMessage, MB_OK | MB_ICONERROR, 0);
+		_stprintf_s(szMessage, 100, _T("SetOptions in FileOpenDialog failed with 0x%x"), hr);
+		AfxMessageBox(szMessage, MB_OK | MB_ICONERROR, 0);
 		pfd->Release();
 		return;
 	}
@@ -110,8 +110,8 @@ void FGIOCreateAndWriteDlg::OnBnClickedButtonFgioPath()
 	{
 		if (hr != HRESULT_FROM_WIN32(ERROR_CANCELLED))
 		{
-			_stprintf_s(wszMessage, 100, _T("Show in FileOpenDialog failed with 0x%x"), hr);
-			AfxMessageBox(wszMessage, MB_OK | MB_ICONERROR, 0);
+			_stprintf_s(szMessage, 100, _T("Show in FileOpenDialog failed with 0x%x"), hr);
+			AfxMessageBox(szMessage, MB_OK | MB_ICONERROR, 0);
 			pfd->Release();
 			return;
 		}
@@ -125,35 +125,35 @@ void FGIOCreateAndWriteDlg::OnBnClickedButtonFgioPath()
 	hr = pfd->GetResult(&psiResult);	
 	if (FAILED(hr))
 	{
-		_stprintf_s(wszMessage, 100, _T("Show in FileOpenDialog failed with 0x%x"), hr);
-		AfxMessageBox(wszMessage, MB_OK | MB_ICONERROR, 0);
+		_stprintf_s(szMessage, 100, _T("Show in FileOpenDialog failed with 0x%x"), hr);
+		AfxMessageBox(szMessage, MB_OK | MB_ICONERROR, 0);
 		pfd->Release();
 		return;
 	}
 	
 	if (NULL == psiResult)
 	{
-		_stprintf_s(wszMessage, 100, _T("GetResult in FileOpenDialog returned nothing"));
-		AfxMessageBox(wszMessage, MB_OK | MB_ICONERROR, 0);
+		_stprintf_s(szMessage, 100, _T("GetResult in FileOpenDialog returned nothing"));
+		AfxMessageBox(szMessage, MB_OK | MB_ICONERROR, 0);
 		pfd->Release();
 		return;
 	}
 			
-	hr = psiResult->GetDisplayName(SIGDN_FILESYSPATH, &wszPath);
+	hr = psiResult->GetDisplayName(SIGDN_FILESYSPATH, &szPath);
 	if (FAILED(hr))
 	{
-		_stprintf_s(wszMessage, 100, _T("GetDisplayName in IShellItem failed with 0x%x"), hr);
-		AfxMessageBox(wszMessage, MB_OK | MB_ICONERROR, 0);
+		_stprintf_s(szMessage, 100, _T("GetDisplayName in IShellItem failed with 0x%x"), hr);
+		AfxMessageBox(szMessage, MB_OK | MB_ICONERROR, 0);
 		pfd->Release();
 		psiResult->Release();
 		return;
 	}
 
 	
-	m_edtPath.SetWindowTextW(wszPath);	
+	m_edtPath.SetWindowTextW(szPath);	
 	psiResult->Release();
 	pfd->Release();
-	CoTaskMemFree(wszPath);
+	CoTaskMemFree(szPath);
 	pfd = NULL;
 	psiResult = NULL;
 
@@ -218,12 +218,12 @@ void FGIOCreateAndWriteDlg::OnBnClickedButtonFgioStart()
 	FILEPROPS		*fp = NULL;
 	SYSTEMTIME		st, st2;
 	ULONGLONG		tickStart = 0, tickEnd = 0;
-	_TCHAR			wszStartTime[100];
-	_TCHAR			wszCompleteTime[100];
-	_TCHAR			wszErrorMessage[100];
+	_TCHAR			szStartTime[100];
+	_TCHAR			szCompleteTime[100];
+	_TCHAR			szErrorMessage[100];
 	int				curPos = 1, newPos = 0;
 	long			lThroughput = 0;
-	_TCHAR			wszThroughPut[100];
+	_TCHAR			szThroughPut[100];
 		
 	pIOEntry = (IOOPENTRY*)malloc( sizeof(IOOPENTRY) );
 	if (NULL == pIOEntry)
@@ -239,14 +239,14 @@ void FGIOCreateAndWriteDlg::OnBnClickedButtonFgioStart()
 	
 	if (pIOEntry->lFileSize < pIOEntry->lBufferSize)
 	{
-		_stprintf_s(wszErrorMessage, 100, _T("A file size smaller than the buffer size does not make sense. Operation is cancelled."));
-		AfxMessageBox(wszErrorMessage, MB_ICONERROR | MB_OK, 0);
+		_stprintf_s(szErrorMessage, 100, _T("A file size smaller than the buffer size does not make sense. Operation is cancelled."));
+		AfxMessageBox(szErrorMessage, MB_ICONERROR | MB_OK, 0);
 		free(pIOEntry);
 		free(fp);
 		return;
 	}
 
-	m_edtPath.GetWindowTextW(pIOEntry->wszPath, MAX_PATH);
+	m_edtPath.GetWindowTextW(pIOEntry->szPath, MAX_PATH);
 
 	if (BST_CHECKED == m_chkFlushBuffer.GetState())
 		pIOEntry->fFlushBuffer = TRUE;
@@ -274,8 +274,8 @@ void FGIOCreateAndWriteDlg::OnBnClickedButtonFgioStart()
 	curPos = 1;
 	
 	GetLocalTime(&st);	
-	_stprintf_s(wszStartTime, 100, _T("Started at %02d:%02d:%02d.%03d"), st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
-	m_statStartTime.SetWindowTextW(wszStartTime);
+	_stprintf_s(szStartTime, 100, _T("Started at %02d:%02d:%02d.%03d"), st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
+	m_statStartTime.SetWindowTextW(szStartTime);
 	m_statCompleteTime.SetWindowTextW(_T("Completed at "));	// we don't want to display previous end time
 	m_statThroughput.SetWindowTextW( _T(" bytes/sec") );
 
@@ -283,7 +283,7 @@ void FGIOCreateAndWriteDlg::OnBnClickedButtonFgioStart()
 	tickStart = GetTickCount64();
 	for (int i = 0; i != pIOEntry->lNumOfFiles; i++)
 	{
-		_stprintf_s(fp->wszFileName, MAX_PATH, _T("%s\\Test_%d.txt"), pIOEntry->wszPath, i);
+		_stprintf_s(fp->szFileName, MAX_PATH, _T("%s\\Test_%d.txt"), pIOEntry->szPath, i);
 		CreateWriteCloseFile((void*)fp);
 		
 		newPos = int((double)(i + 1.0) / (double)(pIOEntry->lNumOfFiles) * 100.0);
@@ -292,16 +292,16 @@ void FGIOCreateAndWriteDlg::OnBnClickedButtonFgioStart()
 	}
 	tickEnd = GetTickCount64();
 	GetLocalTime(&st2);
-	_stprintf_s(wszCompleteTime, 100, _T("Completed at %02d:%02d:%02d.%03d"), st2.wHour, st2.wMinute, st2.wSecond, st2.wMilliseconds);
-	m_statCompleteTime.SetWindowTextW(wszCompleteTime);
+	_stprintf_s(szCompleteTime, 100, _T("Completed at %02d:%02d:%02d.%03d"), st2.wHour, st2.wMinute, st2.wSecond, st2.wMilliseconds);
+	m_statCompleteTime.SetWindowTextW(szCompleteTime);
 
 	lThroughput = (long)(((double)pIOEntry->lNumOfFiles * (double)pIOEntry->lFileSize*1024.0) / double(tickEnd - tickStart) / 1000.0);
-	//_stprintf_s(wszThroughPut, 100, _T("%d bytes/sec"), pIOEntry->wszPath, lThroughput);
-	_stprintf_s(wszThroughPut, 100, _T("%d bytes/sec"), lThroughput);
-	m_statThroughput.SetWindowTextW(wszThroughPut);
+	//_stprintf_s(szThroughPut, 100, _T("%d bytes/sec"), pIOEntry->szPath, lThroughput);
+	_stprintf_s(szThroughPut, 100, _T("%d bytes/sec"), lThroughput);
+	m_statThroughput.SetWindowTextW(szThroughPut);
 	
-	_stprintf_s(wszThroughPut, 100, _T("%lld"), tickEnd-tickStart);
-	AfxMessageBox(wszThroughPut, MB_OK, 0);
+	_stprintf_s(szThroughPut, 100, _T("%lld"), tickEnd-tickStart);
+	AfxMessageBox(szThroughPut, MB_OK, 0);
 	free(fp);	
 	free(pIOEntry);
 	fp = NULL;

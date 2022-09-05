@@ -34,7 +34,7 @@ DWORD WINAPI CreateWriteCloseFile(LPVOID lpParam)
 
 	fp = (FILEPROPS*)lpParam;
 	
-	hFile = CreateFile(fp->wszFileName, GENERIC_WRITE, 0, NULL, OPEN_ALWAYS, fp->dwFlags, NULL);	
+	hFile = CreateFile(fp->szFileName, GENERIC_WRITE, 0, NULL, OPEN_ALWAYS, fp->dwFlags, NULL);	
 	
 	if (hFile == INVALID_HANDLE_VALUE)
 	{				
@@ -73,7 +73,7 @@ DWORD WINAPI CreateWriteCloseFileSlow(LPVOID lpParam)
 
 	fp = (FILEPROPS*)lpParam;
 
-	hFile = CreateFile(fp->wszFileName, GENERIC_WRITE, 0, NULL, OPEN_ALWAYS, fp->dwFlags, NULL);
+	hFile = CreateFile(fp->szFileName, GENERIC_WRITE, 0, NULL, OPEN_ALWAYS, fp->dwFlags, NULL);
 
 	if (hFile == INVALID_HANDLE_VALUE)
 	{
@@ -119,17 +119,17 @@ IOOPENTRYITEM* ConvertIOOPEntryToItem(IOOPENTRY* pIOOPEntry)
 	if (NULL == pIOOPEntryItem)
 		return pIOOPEntryItem;
 	
-	_stprintf_s(pIOOPEntryItem->wszBufferSize, 20, _T("%d"), pIOOPEntry->lBufferSize   );
-	_stprintf_s(pIOOPEntryItem->wszFileSize, 20, _T("%d"), pIOOPEntry->lFileSize);
-	_stprintf_s(pIOOPEntryItem->wszNumOfFiles, 20, _T("%d"), pIOOPEntry->lNumOfFiles);
+	_stprintf_s(pIOOPEntryItem->szBufferSize, 20, _T("%d"), pIOOPEntry->lBufferSize   );
+	_stprintf_s(pIOOPEntryItem->szFileSize, 20, _T("%d"), pIOOPEntry->lFileSize);
+	_stprintf_s(pIOOPEntryItem->szNumOfFiles, 20, _T("%d"), pIOOPEntry->lNumOfFiles);
 	
 	if (pIOOPEntry->fFlushBuffer)
 	{
-		_stprintf_s(pIOOPEntryItem->wszFlushBuffer, 20, _T("TRUE"));
+		_stprintf_s(pIOOPEntryItem->szFlushBuffer, 20, _T("TRUE"));
 	}
 	else
 	{
-		_stprintf_s(pIOOPEntryItem->wszFlushBuffer, 20, _T("FALSE"));
+		_stprintf_s(pIOOPEntryItem->szFlushBuffer, 20, _T("FALSE"));
 	}
 	
 	return pIOOPEntryItem;
@@ -144,14 +144,14 @@ IOOPENTRY* ConvertIOOPEntryItemToIOOPEntry(IOOPENTRYITEM* pIOOPEntryItem)
 		return pIOOPEntry;
 
 	
-	if ( 0 == _tcscmp(pIOOPEntryItem->wszFlushBuffer, _T("TRUE")))
+	if ( 0 == _tcscmp(pIOOPEntryItem->szFlushBuffer, _T("TRUE")))
 		pIOOPEntry->fFlushBuffer = TRUE;
 	else
 		pIOOPEntry->fFlushBuffer = FALSE;
 
-	pIOOPEntry->lBufferSize = _wtol( pIOOPEntryItem->wszBufferSize );
-	pIOOPEntry->lFileSize = _wtol( pIOOPEntryItem->wszFileSize );
-	pIOOPEntry->lNumOfFiles = _wtol( pIOOPEntryItem->wszNumOfFiles );
+	pIOOPEntry->lBufferSize = _wtol( pIOOPEntryItem->szBufferSize );
+	pIOOPEntry->lFileSize = _wtol( pIOOPEntryItem->szFileSize );
+	pIOOPEntry->lNumOfFiles = _wtol( pIOOPEntryItem->szNumOfFiles );
 	
 	return pIOOPEntry;
 }

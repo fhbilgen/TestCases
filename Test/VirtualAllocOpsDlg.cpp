@@ -139,11 +139,11 @@ void VirtualAllocOpsDlg::InsertAllocation()
 
 	i = m_lvEntries.GetItemCount();
 
-	LVAddData(m_lvEntries, i, 0, pVAEntryItem->wszAddress);
-	LVAddData(m_lvEntries, i, 1, pVAEntryItem->wszTotalSize);
-	LVAddData(m_lvEntries, i, 2, pVAEntryItem->wszReservedSize);
-	LVAddData(m_lvEntries, i, 3, pVAEntryItem->wszCommitSize);
-	LVAddData(m_lvEntries, i, 4, pVAEntryItem->wszProtection);
+	LVAddData(m_lvEntries, i, 0, pVAEntryItem->szAddress);
+	LVAddData(m_lvEntries, i, 1, pVAEntryItem->szTotalSize);
+	LVAddData(m_lvEntries, i, 2, pVAEntryItem->szReservedSize);
+	LVAddData(m_lvEntries, i, 3, pVAEntryItem->szCommitSize);
+	LVAddData(m_lvEntries, i, 4, pVAEntryItem->szProtection);
 
 	//free(pVAEntryItem);
 }
@@ -157,8 +157,8 @@ void VirtualAllocOpsDlg::UpdateAllocation(int iRow)
 	
 	pvaei = ConvertVaEntryToItem(&m_VAEntry);
 
-	LVUpdateData(m_lvEntries, iRow, 2, pvaei->wszReservedSize);
-	LVUpdateData(m_lvEntries, iRow, 3, pvaei->wszCommitSize);
+	LVUpdateData(m_lvEntries, iRow, 2, pvaei->szReservedSize);
+	LVUpdateData(m_lvEntries, iRow, 3, pvaei->szCommitSize);
 	free(pvaei);
 }
 
@@ -172,11 +172,11 @@ VAENTRY* VirtualAllocOpsDlg::GetVAEntryFromLV(int iRow)
 	VAENTRYITEM* vaei = (VAENTRYITEM*)malloc(sizeof(VAENTRYITEM));
 	VAENTRY		*pvae = NULL;
 
-	_stprintf_s(vaei->wszAddress, 30, m_lvEntries.GetItemText(iRow, 0));		// start address
-	_stprintf_s(vaei->wszTotalSize, 30, m_lvEntries.GetItemText(iRow, 1));		// total size
-	_stprintf_s(vaei->wszReservedSize, 30, m_lvEntries.GetItemText(iRow, 2));	// reserved size
-	_stprintf_s(vaei->wszCommitSize, 30, m_lvEntries.GetItemText(iRow, 3));		// committed size
-	_stprintf_s(vaei->wszProtection, 20, m_lvEntries.GetItemText(iRow, 4));		// allocation protection
+	_stprintf_s(vaei->szAddress, 30, m_lvEntries.GetItemText(iRow, 0));		// start address
+	_stprintf_s(vaei->szTotalSize, 30, m_lvEntries.GetItemText(iRow, 1));		// total size
+	_stprintf_s(vaei->szReservedSize, 30, m_lvEntries.GetItemText(iRow, 2));	// reserved size
+	_stprintf_s(vaei->szCommitSize, 30, m_lvEntries.GetItemText(iRow, 3));		// committed size
+	_stprintf_s(vaei->szProtection, 20, m_lvEntries.GetItemText(iRow, 4));		// allocation protection
 
 	pvae = ConvertVaEntryItemToEntry(vaei);
 	return pvae;
@@ -194,7 +194,7 @@ int VirtualAllocOpsDlg::filterFunc(unsigned int code, struct _EXCEPTION_POINTERS
 
 void VirtualAllocOpsDlg::BlockFill(_TCHAR* pStartAddress, int iSize)
 {
-	_TCHAR	wszMessage[100];
+	_TCHAR	szMessage[100];
 	size_t sizeSet = (int64_t)iSize * (int64_t) 1024 * (int64_t)1024 / sizeof(_TCHAR);
 	__try
 	{
@@ -202,15 +202,15 @@ void VirtualAllocOpsDlg::BlockFill(_TCHAR* pStartAddress, int iSize)
 	}
 	__except (filterFunc(GetExceptionCode(), GetExceptionInformation()))
 	{
-		_stprintf_s(wszMessage, 100, _T("Exception happened. Code : 0x%x "), GetExceptionCode());
-		AfxMessageBox(wszMessage, MB_ICONERROR, 0);
+		_stprintf_s(szMessage, 100, _T("Exception happened. Code : 0x%x "), GetExceptionCode());
+		AfxMessageBox(szMessage, MB_ICONERROR, 0);
 	}
 }
 
 void VirtualAllocOpsDlg::OnNewNew()
 {
 	VirtualAllocOpsNew vaOpsNew;
-	_TCHAR	wszMessage[100];
+	_TCHAR	szMessage[100];
 
 	ResetVAEntry();
 	vaOpsNew.SetParentDialog(this);
@@ -220,8 +220,8 @@ void VirtualAllocOpsDlg::OnNewNew()
 	{
 		if (NULL == this->m_VAEntry.pAddress)
 		{
-			_stprintf_s(wszMessage, 100, _T("Memory allocation failed with error 0x%x"), this->m_VAEntry.dwGLE);
-			AfxMessageBox(wszMessage, MB_ICONERROR, 0);
+			_stprintf_s(szMessage, 100, _T("Memory allocation failed with error 0x%x"), this->m_VAEntry.dwGLE);
+			AfxMessageBox(szMessage, MB_ICONERROR, 0);
 		}
 		else
 		{
@@ -246,7 +246,7 @@ void VirtualAllocOpsDlg::OnNewNew()
 void VirtualAllocOpsDlg::OnNewCommit()
 {
 	int			iRow = 0;
-	_TCHAR		wszMessage[100];
+	_TCHAR		szMessage[100];
 	VAENTRY		*pvae = NULL;
 
 	iRow = m_lvEntries.GetSelectionMark();
@@ -288,8 +288,8 @@ void VirtualAllocOpsDlg::OnNewCommit()
 	{
 		if (NULL == this->m_VAEntry.pAddress)
 		{
-			_stprintf_s(wszMessage, 100, _T("Memory commitment failed with error 0x%x"), this->m_VAEntry.dwGLE);
-			AfxMessageBox(wszMessage, MB_ICONERROR, 0);
+			_stprintf_s(szMessage, 100, _T("Memory commitment failed with error 0x%x"), this->m_VAEntry.dwGLE);
+			AfxMessageBox(szMessage, MB_ICONERROR, 0);
 		}
 		else
 		{
@@ -333,7 +333,7 @@ void VirtualAllocOpsDlg::OnNewFree()
 	int			iSelectedCount = 0;
 	VAENTRY		*pvae = NULL;
 	POSITION	pos;
-	_TCHAR		wszMessage[100];
+	_TCHAR		szMessage[100];
 
 	iRow = m_lvEntries.GetSelectionMark();
 
@@ -352,8 +352,8 @@ void VirtualAllocOpsDlg::OnNewFree()
 
 			if (!::VirtualFree(pvae->pAddress, 0, MEM_RELEASE))
 			{
-				_stprintf_s(wszMessage, 100, _T("Memory could not be freed. Error : 0x%x "), GetLastError());
-				AfxMessageBox(wszMessage, MB_ICONERROR, 0);
+				_stprintf_s(szMessage, 100, _T("Memory could not be freed. Error : 0x%x "), GetLastError());
+				AfxMessageBox(szMessage, MB_ICONERROR, 0);
 				free(pvae);
 				return;
 			}

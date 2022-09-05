@@ -26,12 +26,12 @@ TESTHELPERS_API int fnTestHelpers(void);
 
 
 typedef struct {
-	_TCHAR wszAddress[30];
-	_TCHAR wszTotalSize[30];
-	_TCHAR wszReservedSize[30];
-	_TCHAR wszCommitSize[30];
-	_TCHAR wszAllocType[20];
-	_TCHAR wszProtection[20];
+	_TCHAR szAddress[30];
+	_TCHAR szTotalSize[30];
+	_TCHAR szReservedSize[30];
+	_TCHAR szCommitSize[30];
+	_TCHAR szAllocType[20];
+	_TCHAR szProtection[20];
 } VAENTRYITEM, *PVAENTRYITEM;
 
 
@@ -46,14 +46,14 @@ typedef struct {
 } VAENTRY, *PVAENTRY;
 
 typedef struct{
-	_TCHAR	wszFileName[MAX_PATH];
+	_TCHAR	szFileName[MAX_PATH];
 	long	lFileSize;
 	BOOL	fFlushBuffer;
 	DWORD	dwFlags;
 }FILEPROPS, *PFILEPROPS;
 
 typedef struct{
-	_TCHAR	wszPath[MAX_PATH];
+	_TCHAR	szPath[MAX_PATH];
 	long	lFileSize;
 	long	lBufferSize;
 	long	lNumOfFiles;
@@ -62,12 +62,12 @@ typedef struct{
 } IOOPENTRY, *PIOOPENTRY;
 
 typedef struct{
-	_TCHAR	wszPath[MAX_PATH];
-	_TCHAR	wszFileSize[20];
-	_TCHAR	wszBufferSize[20];
-	_TCHAR	wszNumOfFiles[20];
-	_TCHAR	wszFlushBuffer[10];
-	_TCHAR	wszFlags;	// New added be careful !!!
+	_TCHAR	szPath[MAX_PATH];
+	_TCHAR	szFileSize[20];
+	_TCHAR	szBufferSize[20];
+	_TCHAR	szNumOfFiles[20];
+	_TCHAR	szFlushBuffer[10];
+	_TCHAR	szFlags;	// New added be careful !!!
 } IOOPENTRYITEM, *PIOOPENTRYITEM;
 
 

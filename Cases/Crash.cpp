@@ -92,7 +92,7 @@ CASES_API void StackOverflow(int iFact)
 }
 
 
-void LogAnEvent(LPCWSTR wszLogDescription)
+void LogAnEvent(LPCWSTR szLogDescription)
 {
 	wchar_t *sourceName = L"TestCases";  // The event source name.
 	DWORD dwEventID = 1001;               // The event identifier.
@@ -111,7 +111,7 @@ void LogAnEvent(LPCWSTR wszLogDescription)
 		NULL,                 // No user security identifier. 
 		1,             // Number of substitution strings. 
 		0,                    // No data. 
-		&wszLogDescription,               // Pointer to strings. 
+		&szLogDescription,               // Pointer to strings. 
 		NULL);                // No data. 
 
 	DeregisterEventSource(h);

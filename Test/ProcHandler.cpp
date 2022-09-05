@@ -2,19 +2,19 @@
 #include "ProcHandler.h"
 
 
-void ProcHandler::SetAppPath(_TCHAR* wszappPath)
+void ProcHandler::SetAppPath(_TCHAR* szappPath)
 {
-	if (m_wszAppPath != NULL)
+	if (m_szAppPath != NULL)
 	{
-		free(m_wszAppPath);
-		m_wszAppPath = NULL;
+		free(m_szAppPath);
+		m_szAppPath = NULL;
 	}
 
-	int strlen = (int)_tcslen(wszappPath) + 1;
-	m_wszAppPath = (_TCHAR*)malloc( strlen * sizeof(_TCHAR) );
+	int strlen = (int)_tcslen(szappPath) + 1;
+	m_szAppPath = (_TCHAR*)malloc( strlen * sizeof(_TCHAR) );
 
-	if ( m_wszAppPath != NULL )
-		_tcscpy_s(m_wszAppPath, strlen, wszappPath);
+	if ( m_szAppPath != NULL )
+		_tcscpy_s(m_szAppPath, strlen, szappPath);
 }
 
 void ProcHandler::SetProcID(DWORD dwprocId)
@@ -39,7 +39,7 @@ void ProcHandler::SetThreadHandle(HANDLE hthread)
 
 _TCHAR* ProcHandler::GetAppPath()
 {
-	return m_wszAppPath;
+	return m_szAppPath;
 }
 
 DWORD ProcHandler::GetProcID()
@@ -64,7 +64,7 @@ DWORD ProcHandler::GetThreadID()
 
 BOOL ProcHandler::IsAppPathEmpty()
 {
-	if (wcsnlen_s(m_wszAppPath, MAX_PATH) == 0)
+	if (wcsnlen_s(m_szAppPath, MAX_PATH) == 0)
 		return TRUE;
 	else
 		return FALSE;
@@ -94,7 +94,7 @@ BOOL ProcHandler::CreateNewProcess()
 	si.cb = sizeof(si);
 	ZeroMemory(&pi, sizeof(pi));
 
-	if (CreateProcess(NULL, m_wszAppPath, NULL, NULL, false, 0, NULL, NULL, &si, &pi))
+	if (CreateProcess(NULL, m_szAppPath, NULL, NULL, false, 0, NULL, NULL, &si, &pi))
 	{
 		m_dwLastError = S_OK;
 		SetProcHandle(pi.hProcess);
