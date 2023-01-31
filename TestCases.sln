@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Native", "Native", "{F10D7E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Managed", "Managed", "{E8F8CFA8-3B6E-47A6-A1CC-C627FAE912E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagedModule", "ManagedModule\ManagedModule.csproj", "{2967C0AD-BF7C-433D-83BB-E8D6CEAF0A65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManagedModule", "ManagedModule\ManagedModule.csproj", "{2967C0AD-BF7C-433D-83BB-E8D6CEAF0A65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,7 +81,8 @@ Global
 		{C19E3A62-8B90-4D22-8E7B-D642E50F7DA7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{C19E3A62-8B90-4D22-8E7B-D642E50F7DA7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{C19E3A62-8B90-4D22-8E7B-D642E50F7DA7}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{C19E3A62-8B90-4D22-8E7B-D642E50F7DA7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C19E3A62-8B90-4D22-8E7B-D642E50F7DA7}.Debug|x64.ActiveCfg = Debug|x64
+		{C19E3A62-8B90-4D22-8E7B-D642E50F7DA7}.Debug|x64.Build.0 = Debug|x64
 		{C19E3A62-8B90-4D22-8E7B-D642E50F7DA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C19E3A62-8B90-4D22-8E7B-D642E50F7DA7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C19E3A62-8B90-4D22-8E7B-D642E50F7DA7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
@@ -95,8 +96,8 @@ Global
 		{2967C0AD-BF7C-433D-83BB-E8D6CEAF0A65}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
 		{2967C0AD-BF7C-433D-83BB-E8D6CEAF0A65}.Debug|Win32.ActiveCfg = Debug|Any CPU
 		{2967C0AD-BF7C-433D-83BB-E8D6CEAF0A65}.Debug|Win32.Build.0 = Debug|Any CPU
-		{2967C0AD-BF7C-433D-83BB-E8D6CEAF0A65}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{2967C0AD-BF7C-433D-83BB-E8D6CEAF0A65}.Debug|x64.Build.0 = Debug|Any CPU
+		{2967C0AD-BF7C-433D-83BB-E8D6CEAF0A65}.Debug|x64.ActiveCfg = Debug|x64
+		{2967C0AD-BF7C-433D-83BB-E8D6CEAF0A65}.Debug|x64.Build.0 = Debug|x64
 		{2967C0AD-BF7C-433D-83BB-E8D6CEAF0A65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2967C0AD-BF7C-433D-83BB-E8D6CEAF0A65}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2967C0AD-BF7C-433D-83BB-E8D6CEAF0A65}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
