@@ -27,7 +27,8 @@ namespace ManagedTest
 
         private void nativeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmNatExc frmNatExc = new frmNatExc();
+            frmNatExc.ShowDialog();
         }
     }
 }
