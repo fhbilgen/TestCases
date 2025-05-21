@@ -59,6 +59,7 @@
 #include <afxcontrolbars.h>
 #include <stack>
 #include <afxcontrolbars.h>
+#include "ErrorRep.h"
 using namespace std;
 
 

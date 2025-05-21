@@ -73,6 +73,7 @@ CASES_API void AccessViolateAndHandle()
 	__except (filterFunc(GetExceptionCode(), GetExceptionInformation()))
 	{
 		LogAnEvent(L"ACCESS VIOLATION EXCEPTION HAPPENED!!!");
+		ReportFault(GetExceptionInformation(), 2);
 	}
 
 }

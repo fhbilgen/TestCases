@@ -64,7 +64,7 @@
             // testsToolStripMenuItem
             // 
             this.testsToolStripMenuItem.Name = "testsToolStripMenuItem";
-            this.testsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.testsToolStripMenuItem.Size = new System.Drawing.Size(124, 26);
             this.testsToolStripMenuItem.Text = "Tests";
             this.testsToolStripMenuItem.Click += new System.EventHandler(this.testsToolStripMenuItem_Click);
             // 
@@ -79,7 +79,7 @@
             // jSONSerializeToolStripMenuItem
             // 
             this.jSONSerializeToolStripMenuItem.Name = "jSONSerializeToolStripMenuItem";
-            this.jSONSerializeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.jSONSerializeToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
             this.jSONSerializeToolStripMenuItem.Text = "JSON Serialize";
             // 
             // exceptionToolStripMenuItem
@@ -103,6 +103,7 @@
             this.managedToolStripMenuItem.Name = "managedToolStripMenuItem";
             this.managedToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.managedToolStripMenuItem.Text = "Managed";
+            this.managedToolStripMenuItem.Click += new System.EventHandler(this.managedToolStripMenuItem_Click);
             // 
             // frmMain
             // 

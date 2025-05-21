@@ -30,5 +30,11 @@ namespace ManagedTest
             frmNatExc frmNatExc = new frmNatExc();
             frmNatExc.ShowDialog();
         }
+
+        private void managedToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMngExc frmMngExc = new frmMngExc();
+            frmMngExc.ShowDialog();
+        }
     }
 }
